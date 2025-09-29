@@ -4,63 +4,95 @@ import { Badge } from "@/components/ui/badge"
 import { Scale, GraduationCap, Award, Users, Heart, BookOpen, Phone, Mail, MapPin, Quote } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import Header from "@/components/ui/header";
 
 export default function AProposPage() {
   const education = [
     {
-      degree: "Master 2 Droit des Affaires",
-      institution: "Université Paris 1 Panthéon-Sorbonne",
-      year: "2008",
-      mention: "Mention Très Bien",
+      degree: "Barrister and Solicitors Training",
+      institution: "Nigeria Law School, Abuja",
+      year: "—",
+      mention: "",
     },
     {
-      degree: "Master 1 Droit Privé",
-      institution: "Université Paris 1 Panthéon-Sorbonne",
-      year: "2007",
-      mention: "Mention Bien",
+      degree: "Master en Contentieux et Arbitrage des Affaires",
+      institution: "Université Catholique d’Afrique Centrale",
+      year: "—",
+      mention: "",
     },
     {
-      degree: "Licence en Droit",
-      institution: "Université Paris 1 Panthéon-Sorbonne",
-      year: "2006",
-      mention: "Mention Bien",
+      degree: "Master in Business Law",
+      institution: "Université de Yaoundé II, SOA",
+      year: "—",
+      mention: "",
+    },
+    {
+      degree: "Bachelor of Laws (LL.B), Common Law",
+      institution: "University of Buea",
+      year: "—",
+      mention: "",
     },
   ]
 
   const experience = [
     {
-      position: "Avocate Associée",
-      company: "Cabinet Juridique (Fondatrice)",
-      period: "2015 - Présent",
+      position: "Avocate inscrite",
+      company: "Barreau du Cameroun et du Nigeria",
+      period: "2014 - Présent",
       description:
-        "Création et direction du cabinet, spécialisée en droit des affaires et accompagnement des entreprises.",
+          "Spécialisée en droit des affaires, droit des sociétés et gouvernance d’entreprise, avec un intérêt particulier pour les investissements, la conformité réglementaire et la gestion contractuelle.",
     },
     {
-      position: "Avocate Senior",
-      company: "Cabinet International de Droit des Affaires",
-      period: "2012 - 2015",
-      description: "Conseil en fusions-acquisitions et restructurations pour des groupes internationaux.",
+      position: "Fondatrice & Responsable",
+      company: "Podcast « Le Guide des Entreprises »",
+      period: "2023 - Présent",
+      description:
+          "Création et animation d’un podcast dédié à l’accompagnement des entreprises sur les enjeux juridiques et de gouvernance.",
     },
     {
-      position: "Juriste d'Entreprise",
-      company: "Groupe Financier Européen",
-      period: "2009 - 2012",
-      description: "Gestion des aspects juridiques des opérations financières et bancaires.",
+      position: "Consultante Juridique",
+      company: "GECEFIC FINANCE S.A (Audit Juridique)",
+      period: "—",
+      description:
+          "Coordination d’une mission d’audit juridique pour une institution de microfinance de 2ème catégorie.",
     },
     {
-      position: "Collaboratrice Juridique",
-      company: "Cabinet de Droit des Sociétés",
-      period: "2008 - 2009",
-      description: "Accompagnement des PME dans leurs démarches de création et développement.",
+      position: "Mandataire",
+      company: "General Electric Cameroon",
+      period: "—",
+      description:
+          "Représentation juridique et conseil pour la structuration et la sécurisation des opérations locales.",
     },
   ]
 
   const certifications = [
-    "Certificat d'Aptitude à la Profession d'Avocat (CAPA)",
-    "Formation Continue en Droit Numérique et RGPD",
-    "Spécialisation en Droit Fiscal des Entreprises",
-    "Médiation et Résolution Alternative des Conflits",
+    "PMP Certification (en cours)",
+    "Certificat d’achèvement – Passation des marchés financés par l’AFD",
+    "Disputes Resolution Certificate, Settlement House Abuja",
+    "Expertise confirmée en ADR, litigation management, consensus building",
   ]
+
+  const projets = [
+    {
+      title: "Investissement & Financement",
+      description:
+          "Contribution à la négociation d’accords de financement avec la BDEAC pour DUVAAL HOLDING SAS.",
+    },
+    {
+      title: "Acquisitions industrielles",
+      description:
+          "Participation aux négociations pour l’acquisition d’une usine de transformation de cacao chez BUHLER, pour NEO INDUSTRY S.A et ATLANTIC COCOA Plc.",
+    },
+  ]
+
+  const services = [
+    "Legal Process Outsourcing",
+    "Contract Management",
+    "IMMOCARE (Real Estate Acquisition Due Diligence)",
+    "Compliance",
+    "Corporate Secretarial Services (Secrétariat d’Entreprises)",
+  ]
+
 
   const values = [
     {
@@ -107,41 +139,7 @@ export default function AProposPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Scale className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-              </Link>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-foreground hover:text-primary transition-colors font-medium">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
       <section className="py-20 bg-gradient-to-br from-card to-background">
@@ -150,17 +148,19 @@ export default function AProposPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-                  Maître <span className="text-primary">Sophie Martin</span>
+                  Maître <span className="text-primary">[Nom de l’Avocate]</span>
                 </h1>
                 <p className="text-xl text-muted-foreground mb-8 text-pretty">
-                  Avocate spécialisée en droit des affaires avec plus de 15 années d'expérience dans l'accompagnement
-                  des entreprises et entrepreneurs.
+                  Avocate inscrite aux barreaux du Cameroun et du Nigeria, spécialisée en droit des affaires et en droit des sociétés.
+                  Depuis 2014, elle accompagne entreprises et investisseurs sur les mécanismes juridiques, la conformité règlementaire
+                  et la gouvernance.
                 </p>
                 <div className="flex flex-wrap gap-2 mb-8">
-                  <Badge className="bg-primary text-primary-foreground">Droit des Sociétés</Badge>
-                  <Badge className="bg-accent text-accent-foreground">Droit Financier</Badge>
-                  <Badge className="bg-primary text-primary-foreground">Droit Foncier</Badge>
-                  <Badge className="bg-accent text-accent-foreground">Conseil Juridique</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Droit des Affaires</Badge>
+                  <Badge className="bg-accent text-accent-foreground">Droit des Sociétés</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Compliance</Badge>
+                  <Badge className="bg-accent text-accent-foreground">Corporate Governance</Badge>
+                  <Badge className="bg-primary text-primary-foreground">Droit Foncier & Immobilier</Badge>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
@@ -175,12 +175,17 @@ export default function AProposPage() {
               </div>
               <div className="relative">
                 <div className="relative h-96 w-full rounded-lg overflow-hidden">
-                  <Image src="/professional-lawyer-woman-in-office.jpg" alt="Maître Sophie Martin" fill className="object-cover" />
+                  <Image
+                      src="/professional-lawyer-woman-in-office.jpg"
+                      alt="Maître [Nom de l’Avocate]"
+                      fill
+                      className="object-cover"
+                  />
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-accent text-accent-foreground p-4 rounded-lg shadow-lg">
                   <div className="text-center">
-                    <div className="text-2xl font-bold">15+</div>
-                    <div className="text-sm">Années d'expérience</div>
+                    <div className="text-2xl font-bold">10+</div>
+                    <div className="text-sm">Années d’expérience</div>
                   </div>
                 </div>
               </div>
@@ -196,24 +201,32 @@ export default function AProposPage() {
             <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Mon Parcours</h2>
             <div className="prose prose-lg max-w-none text-muted-foreground">
               <p className="text-lg leading-relaxed mb-6">
-                Passionnée par le droit des affaires depuis mes études à la Sorbonne, j'ai consacré ma carrière à
-                accompagner les entreprises dans leurs défis juridiques les plus complexes. Mon approche se base sur une
-                écoute attentive et une compréhension approfondie des enjeux économiques de mes clients.
+                Depuis 2014, j’ai choisi de me spécialiser en <strong>droit des affaires</strong> et en <strong>droit des sociétés</strong>,
+                avec un intérêt particulier pour les mécanismes juridiques liés au financement et à la sécurisation des investissements.
+                Mon expertise couvre également la conformité règlementaire et administrative des entreprises, le corporate secretarial
+                services, la gestion des contrats, l’audit juridique, ainsi que la résolution des litiges.
               </p>
               <p className="text-lg leading-relaxed mb-6">
-                Après avoir acquis une solide expérience au sein de cabinets internationaux et en entreprise, j'ai fondé
-                mon cabinet en 2015 avec la conviction qu'un accompagnement juridique de qualité doit être accessible à
-                toutes les entreprises, des startups aux grands groupes.
+                Avocate inscrite aux <strong>barreaux du Cameroun et du Nigeria</strong>, je possède une double maîtrise du système
+                de la <strong>Common Law</strong> et du <strong>Droit Civil français</strong>. Je conseille entreprises et institutions
+                sur des sujets stratégiques de gouvernance et j’ai récemment lancé le podcast <em>“Le guide des entreprises”</em>,
+                dédié aux dirigeants et entrepreneurs.
+              </p>
+              <p className="text-lg leading-relaxed mb-6">
+                Parallèlement, j’élargis mes compétences dans le domaine du <strong>droit foncier</strong>, du
+                <strong> droit immobilier</strong> et du <strong>leasing (crédit-bail)</strong>, avec une formation en gestion de projets
+                (certification PMP en cours). Ces expériences me permettent d’apporter une approche transversale et pragmatique
+                aux problématiques juridiques et économiques de mes clients.
               </p>
               <p className="text-lg leading-relaxed">
-                Aujourd'hui, je mets mon expertise au service de plus de 200 clients, en privilégiant toujours une
-                relation de proximité et de confiance. Ma mission : transformer la complexité juridique en opportunités
-                de développement pour votre entreprise.
+                Ma mission est claire : <strong>offrir aux entreprises un accompagnement juridique de haut niveau</strong>,
+                transformant la complexité réglementaire en leviers de croissance durable.
               </p>
             </div>
           </div>
         </div>
       </section>
+
 
       {/* Values */}
       <section className="py-16 bg-card">
