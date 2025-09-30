@@ -6,9 +6,9 @@ import {Instagram, Linkedin, Scale, Twitter, Youtube,} from "lucide-react"
 
 const navItems = [
     {href: "/apropos", label: "À propos"},
+    {href: "/services", label: "Services"},
     {href: "/blog", label: "Blog"},
     {href: "/projets", label: "Projets"},
-    {href: "/services", label: "Services"},
     {href: "/accessoires", label: "Accessoires"},
 ]
 
@@ -45,12 +45,13 @@ const Header = () => {
                                             key={item.href}
                                             href={item.href}
                                             className={`
-                                            relative text-sm font-medium transition-all duration-300
-                                            group-hover:blur-[2px] hover:!blur-0
-                                            ${isActive
-                                                ? " text-blue-400 after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-blue-50 after:via-blue-500 after:to-blue-50"
+                                              relative text-sm font-medium transition-all duration-300
+                                              hover:blur-none
+                                              group-hover:blur-[2px] 
+                                              ${isActive
+                                                ? "text-black after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-black/10 after:via-black after:to-black/10"
                                                 : "text-muted-foreground hover:text-primary"}
-                                      `}
+                                            `}
                                         >
                                             {item.label}
                                         </Link>

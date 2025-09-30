@@ -9,11 +9,11 @@ import Link from "next/link"
 const navItems = [
     { href: "/apropos", label: "À propos" },
     { href: "", label: "✦" },
+    { href: "/services", label: "Services" },
+    { href: "", label: "✦" },
     { href: "/blog", label: "Blog" },
     { href: "", label: "✦" },
     { href: "/projets", label: "Projets" },
-    { href: "", label: "✦" },
-    { href: "/services", label: "Services" },
     { href: "", label: "✦" },
     { href: "/accessoires", label: "Accessoires" },
 ]

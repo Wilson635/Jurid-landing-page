@@ -74,15 +74,15 @@ export default function LegalHomePage() {
             {/* Trust Indicators */}
             <div className="flex flex-wrap items-center justify-center gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
-                <Scale className="w-4 h-4 text-accent" />
-                <span>15+ ans d'expérience</span>
+                <Scale className="w-4 h-4 text-primary/50" />
+                <span>10+ ans d'expérience</span>
               </div>
               <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-accent" />
+                <Users className="w-4 h-4 text-primary/50" />
                 <span>500+ clients satisfaits</span>
               </div>
               <div className="flex items-center gap-2">
-                <FileText className="w-4 h-4 text-accent" />
+                <FileText className="w-4 h-4 text-primary/50" />
                 <span>Tous domaines juridiques</span>
               </div>
             </div>
