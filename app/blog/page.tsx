@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input"
 import { Scale, Calendar, User, Search, BookOpen, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 
 export default function BlogPage() {
   const categories = [
@@ -96,7 +98,8 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50">
+      <Header />
+      {/*<header className="bg-card border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center">
@@ -130,7 +133,7 @@ export default function BlogPage() {
             <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
           </div>
         </div>
-      </header>
+      </header>*/}
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-card to-background">
@@ -309,7 +312,12 @@ export default function BlogPage() {
             </Button>
           </div>
         </div>
+
       </section>
+
+      {/* Footer */}
+      <Footer />
+
     </div>
   )
 }

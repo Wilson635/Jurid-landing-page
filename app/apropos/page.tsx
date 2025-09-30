@@ -6,6 +6,7 @@ import Image from "next/image"
 import Header from "@/components/ui/header";
 
 import { experience, education, certifications, testimonials, values } from "@/utils"
+import Footer from "@/components/ui/footer";
 
 export default function AProposPage() {
 
@@ -21,7 +22,7 @@ export default function AProposPage() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
-                  Maître <span className="text-primary">[Nom de l’Avocate]</span>
+                  Maître <span className="text-primary">NOFFE</span>
                 </h1>
                 <p className="text-xl text-muted-foreground mb-8 text-pretty">
                   Avocate inscrite aux barreaux du Cameroun et du Nigeria, spécialisée en droit des affaires et en droit des sociétés.
@@ -47,7 +48,7 @@ export default function AProposPage() {
                 </div>
               </div>
               <div className="relative">
-                <div className="relative h-96 w-full rounded-lg overflow-hidden">
+                <div className="relative h-96 w-auto rounded-lg overflow-hidden">
                   <Image
                       src="/professional-lawyer-woman-in-office.jpg"
                       alt="Maître [Nom de l’Avocate]"
@@ -71,7 +72,17 @@ export default function AProposPage() {
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-foreground mb-8 text-center">Mon Parcours</h2>
+            <div className="p-[2px] bg-gradient-to-r from-blue-500 via-blue-200 to-blue-500 w-fit mx-auto">
+              <div className="flex items-center px-4 py-2 bg-background rounded-lg">
+                <h2 className="text-xl text-blue-400 font-bold text-center">03</h2>
+
+                {/* Ligne verticale */}
+                <div className="w-px h-8 bg-gradient-to-r from-blue-300 via-blue-50-500 to-blue-500 mx-4"></div>
+
+                <h2 className="text-xl text-blue-400 font-bold text-center">Mon Parcours</h2>
+              </div>
+            </div>
+
             <div className="prose prose-lg max-w-none text-muted-foreground">
               <p className="text-lg leading-relaxed mb-6">
                 Depuis 2014, j’ai choisi de me spécialiser en <strong>droit des affaires</strong> et en <strong>droit des sociétés</strong>,
@@ -249,34 +260,8 @@ export default function AProposPage() {
         </div>
       </section>
 
-      {/* Contact Info */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold text-foreground mb-8">Prenons Contact</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div className="flex flex-col items-center">
-                <Phone className="w-8 h-8 text-primary mb-2" />
-                <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
-                <p className="text-muted-foreground">+33 1 23 45 67 89</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <Mail className="w-8 h-8 text-accent mb-2" />
-                <h3 className="font-semibold text-foreground mb-1">Email</h3>
-                <p className="text-muted-foreground">sophie.martin@cabinet-juridique.fr</p>
-              </div>
-              <div className="flex flex-col items-center">
-                <MapPin className="w-8 h-8 text-primary mb-2" />
-                <h3 className="font-semibold text-foreground mb-1">Adresse</h3>
-                <p className="text-muted-foreground">75001 Paris, France</p>
-              </div>
-            </div>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Prendre Rendez-vous Maintenant
-            </Button>
-          </div>
-        </div>
-      </section>
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

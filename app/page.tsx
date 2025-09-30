@@ -14,65 +14,51 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import Footer from "@/components/ui/footer";
+import Header from "@/components/ui/header";
 
 export default function LegalHomePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <div className="flex-shrink-0">
-                <div className="flex items-center gap-2">
-                  <Scale className="w-8 h-8 text-primary" />
-                  <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-                </div>
-              </div>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-muted-foreground hover:text-primary transition-colors">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <div className="flex items-center gap-4">
-              <Button variant="outline" size="sm">
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Assistant IA
-              </Button>
-              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-card to-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="px-6 py-24 sm:py-32 relative rounded-lg overflow-hidden before:absolute before:top-0 before:start-1/2 bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] bg-no-repeat bg-top :bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
+        {/* Pattern Background */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <svg
+              aria-hidden="true"
+              className="absolute inset-0 h-full w-full stroke-gray-200/40"
+          >
+            <defs>
+              <pattern
+                  id="circle-pattern"
+                  width="100"
+                  height="100"
+                  patternUnits="userSpaceOnUse"
+              >
+                <circle cx="1" cy="1" r="1" fill="currentColor" />
+              </pattern>
+            </defs>
+            <rect
+                width="100%"
+                height="100%"
+                fill="url(#circle-pattern)"
+                className="text-gray-100"
+            />
+          </svg>
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-6 text-balance">
               Votre <span className="text-primary">Expert Juridique</span> de Confiance
             </h1>
             <p className="text-xl text-muted-foreground mb-8 text-pretty">
-              Consultation juridique, création d'entreprises, rédaction de contrats et bien plus. Bénéficiez d'un
-              accompagnement professionnel pour tous vos besoins juridiques.
+              Consultation juridique, création d'entreprises, rédaction de contrats et
+              bien plus. Bénéficiez d'un accompagnement professionnel pour tous vos
+              besoins juridiques.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-4">
@@ -103,6 +89,7 @@ export default function LegalHomePage() {
           </div>
         </div>
       </section>
+
 
       {/* Services Overview */}
       <section id="services" className="py-16 bg-background">

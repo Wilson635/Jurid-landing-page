@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Scale, FileText, Building2, BookOpen, Shield, ArrowLeft, Check, Phone, Mail } from "lucide-react"
+import {Scale, FileText, Building2, BookOpen, Shield, ArrowLeft, Check, Phone, Mail, Landmark} from "lucide-react"
 import Link from "next/link"
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 
 export default function ConsultationJuridiquePage() {
   const subServices = [
@@ -41,41 +43,7 @@ export default function ConsultationJuridiquePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Scale className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-              </Link>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-muted-foreground hover:text-primary transition-colors">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Breadcrumb */}
       <div className="bg-card border-b border-border">
@@ -95,30 +63,50 @@ export default function ConsultationJuridiquePage() {
       </div>
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-card to-background">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto">
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors mb-6"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Retour aux services
-            </Link>
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
-                <Scale className="w-8 h-8 text-primary" />
+      <div className="bg-white">
+        <div className="mx-auto max-w-6xl sm:px-16 lg:px-0 py-12">
+          <div
+              className="relative isolate overflow-hidden bg-gray-900 px-6 pt-16 shadow-2xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
+            <svg viewBox="0 0 1024 1024" aria-hidden="true"
+                 className="absolute top-1/2 left-1/2 -z-10 size-256 -translate-y-1/2 mask-[radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0">
+              <circle r="512" cx="512" cy="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fill-opacity="0.7"/>
+              <defs>
+                <radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
+                  <stop stop-color="#7775D6"/>
+                  <stop offset="1" stop-color="#E935C1"/>
+                </radialGradient>
+              </defs>
+            </svg>
+            <div className="mx-auto lg:mx-0 lg:flex-auto lg:py-8 text-left">
+
+              <div className="mt-10 flex  gap-x-6 lg:justify-start">
+                <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 text-white hover:text-white/80 transition-colors mb-6"
+                >
+                  <ArrowLeft className="w-4 h-4"/>
+                  Retour aux services
+                </Link>
               </div>
-              <div>
-                <h1 className="text-4xl md:text-5xl font-bold text-foreground text-balance">Consultation Juridique</h1>
-                <p className="text-xl text-muted-foreground mt-2">
-                  Conseils personnalisés et expertise juridique complète
-                </p>
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                  <Scale className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-balance text-white">
+                    Consultation Juridique
+                  </h2>
+                  <p className="mt-2 text-xl text-pretty text-gray-300">
+                    Conseils personnalisés et expertise juridique complète
+                  </p>
+                </div>
               </div>
+
+
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Sub-services */}
       <section className="py-16 bg-background">
@@ -190,7 +178,7 @@ export default function ConsultationJuridiquePage() {
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Téléphone</label>
-                    <Input type="tel" placeholder="+33 1 23 45 67 89" />
+                    <Input type="tel" placeholder="+237 6 00 00 00" />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Type de consultation</label>
@@ -230,7 +218,7 @@ export default function ConsultationJuridiquePage() {
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
                         <Phone className="w-4 h-4 text-accent" />
-                        <span className="text-foreground">+33 1 23 45 67 89</span>
+                        <span className="text-foreground">+237 6 00 00 00</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Mail className="w-4 h-4 text-accent" />
@@ -272,6 +260,9 @@ export default function ConsultationJuridiquePage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }
