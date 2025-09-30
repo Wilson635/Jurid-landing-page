@@ -13,10 +13,10 @@ const navItems = [
 ]
 
 const socialLinks = [
-    {href: "https://x.com", icon: Twitter},
-    {href: "https://linkedin.com", icon: Linkedin},
-    {href: "https://instagram.com", icon: Instagram},
-    {href: "https://youtube.com", icon: Youtube},
+    {href: "https://x.com", icon: Twitter, color: "#1DA1F2"},
+    {href: "https://linkedin.com", icon: Linkedin, color: "#0A66C2"},
+    {href: "https://instagram.com", icon: Instagram, color: "#E4405F"},
+    {href: "https://youtube.com", icon: Youtube, color: "#FF0000"},
 ]
 
 const Header = () => {
