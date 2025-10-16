@@ -143,7 +143,7 @@ export default function DroitFinancierPage() {
                 {subServices.map((service, index) => {
                   const IconComponent = service.icon
                   return (
-                      <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+                      <Card key={index} className="border-border hover:shadow-lg py-6 transition-shadow">
                         <CardHeader>
                           <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                             <IconComponent className="w-6 h-6 text-primary"/>
@@ -155,7 +155,7 @@ export default function DroitFinancierPage() {
                           <ul className="space-y-2">
                             {service.features.map((feature, featureIndex) => (
                                 <li key={featureIndex} className="flex items-center text-sm text-muted-foreground">
-                                  <Check className="w-4 h-4 text-accent-foreground mr-2 flex-shrink-0"/>
+                                  <Check className="w-4 h-4 text-primary/50 mr-2 flex-shrink-0"/>
                                   {feature}
                                 </li>
                             ))}
@@ -182,7 +182,7 @@ export default function DroitFinancierPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 {/* Contact Form */}
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle>Demande de Conseil Financier</CardTitle>
                     <CardDescription>Décrivez votre situation financière pour un conseil adapté</CardDescription>
@@ -230,7 +230,7 @@ export default function DroitFinancierPage() {
 
                 {/* Contact Info */}
                 <div className="space-y-6">
-                  <Card className="border-border">
+                  <Card className="border-border py-6">
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2">
                         <Phone className="w-5 h-5 text-primary"/>
@@ -241,37 +241,37 @@ export default function DroitFinancierPage() {
                       <p className="text-muted-foreground mb-4">Nos experts en droit financier et bancaire</p>
                       <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                          <Phone className="w-4 h-4 text-accent-foreground"/>
+                          <Phone className="w-4 h-4 text-primary/50"/>
                           <span className="text-foreground">+237 6 00 00 00</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <Mail className="w-4 h-4 text-accent-foreground"/>
+                          <Mail className="w-4 h-4 text-primary/50"/>
                           <span className="text-foreground">financier@cabinet-juridique.fr</span>
                         </div>
                       </div>
                     </CardContent>
                   </Card>
 
-                  <Card className="border-border">
+                  <Card className="border-border py-6">
                     <CardHeader>
                       <CardTitle>Nos Atouts</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-3">
                         <li className="flex items-start gap-2">
-                          <Check className="w-5 h-5 text-accent-foreground mt-0.5 flex-shrink-0"/>
+                          <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0"/>
                           <span className="text-sm text-muted-foreground">Expertise reconnue en droit financier</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Check className="w-5 h-5 text-accent-foreground mt-0.5 flex-shrink-0"/>
+                          <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0"/>
                           <span className="text-sm text-muted-foreground">Relations privilégiées avec les banques</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Check className="w-5 h-5 text-accent-foreground mt-0.5 flex-shrink-0"/>
+                          <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0"/>
                           <span className="text-sm text-muted-foreground">Veille réglementaire permanente</span>
                         </li>
                         <li className="flex items-start gap-2">
-                          <Check className="w-5 h-5 text-accent-foreground mt-0.5 flex-shrink-0"/>
+                          <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0"/>
                           <span className="text-sm text-muted-foreground">Approche pragmatique et efficace</span>
                         </li>
                       </ul>

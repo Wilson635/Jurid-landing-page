@@ -99,41 +99,6 @@ export default function BlogPage() {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <Header />
-      {/*<header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Scale className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-              </Link>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-muted-foreground hover:text-primary transition-colors">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-          </div>
-        </div>
-      </header>*/}
 
       {/* Hero Section */}
       <section className="py-16 bg-gradient-to-br from-card to-background">
@@ -159,7 +124,7 @@ export default function BlogPage() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <Card className="border-border mb-8">
+            <Card className="border-border mb-8 py-6">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <BookOpen className="w-5 h-5 text-primary" />
@@ -187,7 +152,7 @@ export default function BlogPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-border">
+            <Card className="border-border py-6">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-accent" />
@@ -248,7 +213,7 @@ export default function BlogPage() {
             {/* Articles Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {articles.map((article, index) => (
-                <Card key={index} className="border-border hover:shadow-lg transition-shadow group">
+                <Card key={index} className="border-border pb-6 hover:shadow-lg transition-shadow group">
                   <div className="relative h-48 overflow-hidden rounded-t-lg">
                     <Image
                       src={article.image || "/placeholder.svg"}

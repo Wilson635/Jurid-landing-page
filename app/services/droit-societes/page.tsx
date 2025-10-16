@@ -114,7 +114,7 @@ export default function DroitSocietesPage() {
               {subServices.map((service, index) => {
                 const IconComponent = service.icon
                 return (
-                  <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+                  <Card key={index} className="border-border hover:shadow-lg transition-shadow py-6">
                     <CardHeader>
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <IconComponent className="w-6 h-6 text-primary" />
@@ -153,7 +153,7 @@ export default function DroitSocietesPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card className="border-border">
+              <Card className="border-border py-6">
                 <CardHeader>
                   <CardTitle>Demande de Conseil</CardTitle>
                   <CardDescription>Décrivez votre projet d'entreprise pour un conseil personnalisé</CardDescription>
@@ -201,7 +201,7 @@ export default function DroitSocietesPage() {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Phone className="w-5 h-5 text-primary" />
@@ -223,7 +223,7 @@ export default function DroitSocietesPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle>Notre Approche</CardTitle>
                   </CardHeader>

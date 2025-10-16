@@ -32,8 +32,8 @@ const Footer = () => {
                         <p>&copy; {getCurrentYear()} SSII-Services. Tous droits réservés.</p>
                     </div>
                     <div className="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center text-sm text-muted-foreground">
-                        <nav className="hidden md:block">
-                            <div className="flex items-center space-x-6 group">
+                        <nav className="block">
+                            <div className="flex flex-wrap items-center space-x-6 group">
                                 {navItems.map((item) => {
                                     return (
                                         <Link

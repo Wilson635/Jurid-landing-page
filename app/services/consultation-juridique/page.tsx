@@ -117,7 +117,7 @@ export default function ConsultationJuridiquePage() {
               {subServices.map((service, index) => {
                 const IconComponent = service.icon
                 return (
-                  <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+                  <Card key={index} className="border-border hover:shadow-lg py-6 transition-shadow">
                     <CardHeader>
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <IconComponent className="w-6 h-6 text-primary" />
@@ -129,7 +129,7 @@ export default function ConsultationJuridiquePage() {
                       <ul className="space-y-2">
                         {service.features.map((feature, featureIndex) => (
                           <li key={featureIndex} className="flex items-center text-sm text-muted-foreground">
-                            <Check className="w-4 h-4 text-accent mr-2 flex-shrink-0" />
+                            <Check className="w-4 h-4 text-primary/50 mr-2 flex-shrink-0" />
                             {feature}
                           </li>
                         ))}
@@ -156,7 +156,7 @@ export default function ConsultationJuridiquePage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card className="border-border">
+              <Card className="border-border py-6">
                 <CardHeader>
                   <CardTitle>Formulaire de Contact</CardTitle>
                   <CardDescription>Remplissez ce formulaire pour une consultation personnalisée</CardDescription>
@@ -204,7 +204,7 @@ export default function ConsultationJuridiquePage() {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Phone className="w-5 h-5 text-primary" />
@@ -217,39 +217,39 @@ export default function ConsultationJuridiquePage() {
                     </p>
                     <div className="space-y-2">
                       <div className="flex items-center gap-2">
-                        <Phone className="w-4 h-4 text-accent" />
+                        <Phone className="w-4 h-4 text-primary/50" />
                         <span className="text-foreground">+237 6 00 00 00</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <Mail className="w-4 h-4 text-accent" />
+                        <Mail className="w-4 h-4 text-primary/50" />
                         <span className="text-foreground">consultation@cabinet-juridique.fr</span>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
 
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle>Pourquoi Nous Choisir ?</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3">
                       <li className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-muted-foreground">
                           15+ années d'expérience en droit des affaires
                         </span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-muted-foreground">Réponse garantie sous 24h</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-muted-foreground">Première consultation gratuite</span>
                       </li>
                       <li className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                        <Check className="w-5 h-5 text-primary/50 mt-0.5 flex-shrink-0" />
                         <span className="text-sm text-muted-foreground">Tarifs transparents et compétitifs</span>
                       </li>
                     </ul>

@@ -36,7 +36,7 @@ export default function PanierPage() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Cart Items */}
             <div className="lg:col-span-2">
-              <Card>
+              <Card className="py-6">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
                     <ShoppingBag className="h-5 w-5" />
@@ -75,7 +75,7 @@ export default function PanierPage() {
 
             {/* Order Summary */}
             <div>
-              <Card>
+              <Card className="py-6">
                 <CardHeader>
                   <CardTitle>Récapitulatif</CardTitle>
                 </CardHeader>

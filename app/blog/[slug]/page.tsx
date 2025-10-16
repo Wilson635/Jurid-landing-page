@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import { Scale, Calendar, User, ArrowLeft, Share2, BookOpen, Clock } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import Header from "@/components/ui/header";
+import Footer from "@/components/ui/footer";
 
 // This would typically come from a CMS or database
 const getArticleBySlug = (slug: string) => {
@@ -133,41 +135,7 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Scale className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-              </Link>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-muted-foreground hover:text-primary transition-colors">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Breadcrumb */}
       <div className="bg-card border-b border-border">
@@ -252,7 +220,7 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           </div>
 
           {/* Related Articles */}
-          <Card className="border-border">
+          <Card className="border-border py-6">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BookOpen className="w-5 h-5 text-primary" />
@@ -293,6 +261,9 @@ export default function BlogArticlePage({ params }: { params: { slug: string } }
           </Button>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

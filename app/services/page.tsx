@@ -131,7 +131,7 @@ export default function ServicesPage() {
               {services.map((service, index) => {
                 const IconComponent = service.icon
                 return (
-                    <Card key={index} className="border-border hover:shadow-lg transition-all duration-300 group">
+                    <Card key={index} className="border-border hover:shadow-lg py-6 transition-all duration-300 group">
                       <CardHeader className="pb-4">
                         <div className={`w-16 h-16 rounded-lg flex items-center justify-center mb-4 ${service.color}`}>
                           <IconComponent className="w-8 h-8"/>

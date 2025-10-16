@@ -112,7 +112,7 @@ export default function DroitFoncierPage() {
               {subServices.map((service, index) => {
                 const IconComponent = service.icon
                 return (
-                  <Card key={index} className="border-border hover:shadow-lg transition-shadow">
+                  <Card key={index} className="border-border py-6 hover:shadow-lg transition-shadow">
                     <CardHeader>
                       <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                         <IconComponent className="w-6 h-6 text-primary" />
@@ -151,7 +151,7 @@ export default function DroitFoncierPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
-              <Card className="border-border">
+              <Card className="border-border py-6">
                 <CardHeader>
                   <CardTitle>Demande de Conseil Foncier</CardTitle>
                   <CardDescription>Décrivez votre projet immobilier pour un accompagnement sur mesure</CardDescription>
@@ -202,7 +202,7 @@ export default function DroitFoncierPage() {
 
               {/* Contact Info */}
               <div className="space-y-6">
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle className="flex items-center gap-2">
                       <Phone className="w-5 h-5 text-primary" />
@@ -224,7 +224,7 @@ export default function DroitFoncierPage() {
                   </CardContent>
                 </Card>
 
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle>Pourquoi Nous Faire Confiance ?</CardTitle>
                   </CardHeader>

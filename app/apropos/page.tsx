@@ -126,7 +126,7 @@ export default function AProposPage() {
             {values.map((value, index) => {
               const IconComponent = value.icon
               return (
-                <Card key={index} className="border-border text-center">
+                <Card key={index} className="border-border py-6 text-center">
                   <CardHeader>
                     <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="w-8 h-8 text-primary" />
@@ -154,7 +154,7 @@ export default function AProposPage() {
                 </h2>
                 <div className="space-y-6">
                   {experience.map((exp, index) => (
-                    <Card key={index} className="border-border">
+                    <Card key={index} className="border-border py-6">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
@@ -182,7 +182,7 @@ export default function AProposPage() {
                 </h2>
                 <div className="space-y-6 mb-8">
                   {education.map((edu, index) => (
-                    <Card key={index} className="border-border">
+                    <Card key={index} className="border-border py-6">
                       <CardHeader>
                         <div className="flex justify-between items-start">
                           <div>
@@ -202,7 +202,7 @@ export default function AProposPage() {
                 </div>
 
                 {/* Certifications */}
-                <Card className="border-border">
+                <Card className="border-border py-6">
                   <CardHeader>
                     <CardTitle className="text-lg text-foreground flex items-center gap-2">
                       <BookOpen className="w-5 h-5 text-primary" />
@@ -238,7 +238,7 @@ export default function AProposPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="border-border">
+              <Card key={index} className="border-border py-6">
                 <CardHeader>
                   <Quote className="w-8 h-8 text-accent mb-2" />
                   <div className="flex gap-1 mb-2">

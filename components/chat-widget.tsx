@@ -285,7 +285,7 @@ export default function ChatWidget() {
                   </Button>
                 </div>
                 <p className="text-xs text-muted-foreground mt-2 text-center">
-                  Assistant IA pour vous orienter • Consultation gratuite disponible
+                  Assistant IA pour vous orienter • Contactez un expert pour des conseils personnalisés
                 </p>
               </div>
             </CardContent>

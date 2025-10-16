@@ -4,6 +4,8 @@ import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
 import { Search, ShoppingCart, Star, Filter, Download, FileText, BookOpen, Video } from "lucide-react"
 import Link from "next/link"
+import Footer from "@/components/ui/footer";
+import Header from "@/components/ui/header";
 
 const categories = [
   { name: "Modèles de Contrats", icon: FileText, count: 45 },
@@ -81,6 +83,7 @@ export default function BoutiquePage() {
   return (
     <div className="min-h-screen bg-background">
       {/* Header Section */}
+      <Header />
       <section className="bg-gradient-to-r from-primary/5 to-secondary/5 py-16">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
@@ -106,7 +109,7 @@ export default function BoutiquePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((category, index) => (
               <Link key={index} href={`/boutique/categorie/${category.name.toLowerCase().replace(/\s+/g, "-")}`}>
-                <Card className="hover:shadow-lg transition-shadow cursor-pointer group">
+                <Card className="hover:shadow-lg py-6 transition-shadow cursor-pointer group">
                   <CardContent className="p-6 text-center">
                     <category.icon className="h-12 w-12 text-primary mx-auto mb-4 group-hover:text-secondary transition-colors" />
                     <h3 className="font-semibold text-lg mb-2">{category.name}</h3>
@@ -236,6 +239,9 @@ export default function BoutiquePage() {
           </div>
         </div>
       </section>
+
+      {/* Footer */}
+      <Footer />
     </div>
   )
 }

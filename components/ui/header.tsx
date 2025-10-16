@@ -34,8 +34,8 @@ const Header = () => {
                 </div>
 
                 {/* Navigation */}
-                <div className="p-[1px] bg-foreground/10 w-fit mx-auto">
-                    <nav className="hidden md:block">
+                <div className="p-[1px] w-fit mx-auto">
+                    <nav className="hidden border md:block">
                         <div className="items-center px-4 py-2.5">
                             <div className="flex items-center space-x-6 group">
                                 {navItems.map((item) => {

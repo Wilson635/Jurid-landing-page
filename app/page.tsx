@@ -103,7 +103,7 @@ export default function LegalHomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {/* Consultation Juridique */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border py-6 hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <Scale className="w-6 h-6 text-primary" />
@@ -125,7 +125,7 @@ export default function LegalHomePage() {
             </Card>
 
             {/* Droit des Sociétés */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border hover:shadow-lg py-6 transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                   <Building className="w-6 h-6 text-accent" />
@@ -147,7 +147,7 @@ export default function LegalHomePage() {
             </Card>
 
             {/* Services Financiers */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border hover:shadow-lg py-6 transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <FileText className="w-6 h-6 text-primary" />
@@ -169,7 +169,7 @@ export default function LegalHomePage() {
             </Card>
 
             {/* Droit Foncier */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border hover:shadow-lg py-6 transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                   <MapPin className="w-6 h-6 text-accent" />
@@ -191,7 +191,7 @@ export default function LegalHomePage() {
             </Card>
 
             {/* Blog Preview */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border hover:shadow-lg py-6 transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                   <BookOpen className="w-6 h-6 text-primary" />
@@ -210,7 +210,7 @@ export default function LegalHomePage() {
             </Card>
 
             {/* E-commerce Preview */}
-            <Card className="border-border hover:shadow-lg transition-shadow">
+            <Card className="border-border hover:shadow-lg py-6 transition-shadow">
               <CardHeader>
                 <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                   <ShoppingCart className="w-6 h-6 text-accent" />
