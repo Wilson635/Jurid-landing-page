@@ -55,7 +55,7 @@ const Header = () => {
                                               hover:blur-none
                                               group-hover:blur-[2px] 
                                               ${isActive
-                                                ? "text-black after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-black/10 after:via-black after:to-black/10"
+                                                ? "text-black dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-black/10 after:via-black after:to-black/10 dark:after:from-blue-400/10 dark:after:via-blue-400 dark:after:to-blue-400/10"
                                                 : "text-muted-foreground hover:text-primary"}
                                             `}
                                         >
