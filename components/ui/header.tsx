@@ -2,7 +2,9 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {Instagram, Linkedin, Scale, Twitter, Youtube,} from "lucide-react"
+import {Instagram, Linkedin, Moon, Scale, Sun, Twitter, Youtube,} from "lucide-react"
+import {useTheme} from "@/hooks/use-theme";
+import {Button} from "@/components/ui/button";
 
 const navItems = [
     {href: "/apropos", label: "À propos"},
@@ -21,6 +23,10 @@ const socialLinks = [
 
 const Header = () => {
     const pathname = usePathname()
+
+    const { theme, toggleTheme, mounted } = useTheme()
+
+    if (!mounted) return null
 
     return (
         <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
@@ -80,6 +86,14 @@ const Header = () => {
                     >
                         Par Mail
                     </Link>
+                    <Button
+                        variant="outline"
+                        className="p-5 rounded-none"
+                        onClick={toggleTheme}
+                        title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                    >
+                        {theme === "light" ? <Moon className="h-6 w-6 " /> : <Sun className="h-6 w-6" />}
+                    </Button>
                 </div>
             </div>
         </header>
