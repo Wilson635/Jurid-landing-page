@@ -2,9 +2,16 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {Instagram, Linkedin, Moon, Scale, Sun, Twitter, Youtube,} from "lucide-react"
+import {Instagram, Linkedin, Menu, Moon, Scale, Sun, Twitter, Youtube,} from "lucide-react"
 import {useTheme} from "@/hooks/use-theme";
 import {Button} from "@/components/ui/button";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuLabel, DropdownMenuSeparator,
+    DropdownMenuTrigger
+} from "@/components/ui/dropdown-menu";
 
 const navItems = [
     {href: "/apropos", label: "À propos"},
@@ -40,7 +47,8 @@ const Header = () => {
                 </div>
 
                 {/* Navigation */}
-                <div className="p-[1px] w-fit mx-auto">
+                <div className="p-[1px] w-fit mx-auto flex items-center">
+                    {/* Desktop Navigation */}
                     <nav className="hidden border md:block">
                         <div className="items-center px-4 py-2.5">
                             <div className="flex items-center space-x-6 group">
@@ -51,13 +59,13 @@ const Header = () => {
                                             key={item.href}
                                             href={item.href}
                                             className={`
-                                              relative text-sm font-medium transition-all duration-300
-                                              hover:blur-none
-                                              group-hover:blur-[2px] 
-                                              ${isActive
-                                                ? "text-black dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-black/10 after:via-black after:to-black/10 dark:after:from-blue-400/10 dark:after:via-blue-400 dark:after:to-blue-400/10"
-                                                : "text-muted-foreground hover:text-primary"}
-                                            `}
+                                                  relative text-sm font-medium transition-all duration-300
+                                                  hover:blur-none
+                                                  group-hover:blur-[2px] 
+                                                  ${isActive
+                                                        ? "text-black dark:text-blue-400 after:content-[''] after:absolute after:left-0 after:-bottom-2.5 after:h-[1px] after:w-full after:bg-gradient-to-r after:from-black/10 after:via-black after:to-black/10 dark:after:from-blue-400/10 dark:after:via-blue-400 dark:after:to-blue-400/10"
+                                                        : "text-muted-foreground hover:text-primary"}
+                                                `}
                                         >
                                             {item.label}
                                         </Link>
@@ -66,26 +74,36 @@ const Header = () => {
                             </div>
                         </div>
                     </nav>
+
+
+
+                </div>
+
+                <div className="hidden md:block mr-4">
+                    <div className="flex items-center gap-4">
+                        {socialLinks.map(({href, icon: Icon}) => (
+                            <Link
+                                key={href}
+                                href={href}
+                                target="_blank"
+                                className="text-muted-foreground hover:text-primary transition-colors"
+                            >
+                                <Icon className="w-5 h-5"/>
+                            </Link>
+                        ))}
+                        <Link
+                            href="mailto:contact@exemple.com"
+                            className="px-3 py-2.5 border text-sm hover:bg-accent transition"
+                        >
+                            Par Mail
+                        </Link>
+                    </div>
                 </div>
 
                 {/* Socials + Actions */}
                 <div className="flex items-center gap-4">
-                    {socialLinks.map(({href, icon: Icon}) => (
-                        <Link
-                            key={href}
-                            href={href}
-                            target="_blank"
-                            className="text-muted-foreground hover:text-primary transition-colors"
-                        >
-                            <Icon className="w-5 h-5"/>
-                        </Link>
-                    ))}
-                    <Link
-                        href="mailto:contact@exemple.com"
-                        className="px-3 py-2.5 border text-sm hover:bg-accent transition"
-                    >
-                        Par Mail
-                    </Link>
+
+                    {/*  Toggle Theme */}
                     <Button
                         variant="outline"
                         className="p-5 rounded-none"
@@ -94,7 +112,76 @@ const Header = () => {
                     >
                         {theme === "light" ? <Moon className="h-6 w-6 " /> : <Sun className="h-6 w-6" />}
                     </Button>
+
+                    {/* Toggle Translation */}
+                    <Button
+                        variant="outline"
+                        className="p-5 rounded-none"
+                    >
+                        <span className="text-primary">FR</span>
+                    </Button>
+
+                    {/* Mobile Navigation */}
+                    <nav className="md:hidden block">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <Button className="p-5 rounded-none">
+                                    <Menu className="h-5 w-5" />
+                                    <span className="sr-only">Ouvrir le menu</span>
+                                </Button>
+                            </DropdownMenuTrigger>
+
+                            <DropdownMenuContent align="end" className="w-48 z-50">
+                                <DropdownMenuLabel>Navigation</DropdownMenuLabel>
+                                <DropdownMenuSeparator />
+
+                                {navItems.map((item) => {
+                                    const isActive = pathname === item.href
+                                    return (
+                                        <Link key={item.href} href={item.href}>
+                                            <DropdownMenuItem
+                                                className={`cursor-pointer ${
+                                                    isActive
+                                                        ? 'bg-accent text-accent-foreground font-semibold'
+                                                        : ''
+                                                }`}
+                                            >
+                                                {item.label}
+                                            </DropdownMenuItem>
+                                        </Link>
+                                    )
+                                })}
+
+                                <DropdownMenuSeparator />
+
+                                <div className="flex flex-col gap-2 items-center p-2">
+                                    <div className="flex items-center gap-4">
+                                        {socialLinks.map(({href, icon: Icon}) => (
+                                            <Link
+                                                key={href}
+                                                href={href}
+                                                target="_blank"
+                                                className="text-muted-foreground hover:text-primary transition-colors"
+                                            >
+                                                <Icon className="w-5 h-5"/>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                    <Link
+                                        href="mailto:contact@exemple.com"
+                                        className="px-3 py-2.5 w-full text-center border text-sm hover:bg-accent transition"
+                                    >
+                                        Par Mail
+                                    </Link>
+                                </div>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+
+                    </nav>
                 </div>
+
+
             </div>
         </header>
     )

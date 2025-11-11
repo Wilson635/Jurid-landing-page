@@ -23,12 +23,12 @@ export default function LegalHomePage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="px-6 py-24 sm:py-32 relative rounded-lg overflow-hidden before:absolute before:top-0 before:start-1/2 bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] bg-no-repeat bg-top :bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
+      <section className="px-6 py-24 sm:py-32 relative rounded-xl overflow-hidden before:absolute before:top-0 w-full before:start-1/2 bg-[url('/polygon-bg-light.svg')] before:bg-[url('/polygon-bg-light.svg')] dark:bg-[url('/polygon-bg-element.svg')] dark:before:bg-[url('/polygon-bg-element.svg')] bg-no-repeat bg-top :bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
         {/* Pattern Background */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <svg
               aria-hidden="true"
-              className="absolute inset-0 h-full w-full stroke-gray-200/40"
+              className="absolute inset-0 h-full w-full stroke-gray-200/40 dark:stroke-gray-800/40"
           >
             <defs>
               <pattern
@@ -44,7 +44,7 @@ export default function LegalHomePage() {
                 width="100%"
                 height="100%"
                 fill="url(#circle-pattern)"
-                className="text-gray-100"
+                className="text-gray-100 dark:text-gray-800/40"
             />
           </svg>
         </div>
