@@ -11,7 +11,11 @@ export const metadata: Metadata = {
   title: "Cabinet Juridique - Expert Juridique de Confiance",
   description:
     "Consultation juridique, création d'entreprises, droit des sociétés. Votre expert juridique pour tous vos besoins professionnels.",
-  generator: "v0.app",
+    icons: {
+      icon: "/scale.svg",
+      shortcut: "/scale.svg",
+      apple: "/scale.svg",
+    }
 }
 
 export default function RootLayout({
