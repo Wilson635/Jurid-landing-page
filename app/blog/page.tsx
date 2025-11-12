@@ -101,7 +101,25 @@ export default function BlogPage() {
       <Header />
 
       {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-br from-card to-background">
+      <div className="relative isolate overflow-hidden bg-white dark:bg-black px-6 py-20 sm:py-32 lg:overflow-visible lg:px-0">
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <svg aria-hidden="true"
+               viewBox="0 0 1024 1024"
+               className="absolute top-0 left-[max(50%,25rem)] h-256 w-full -translate-x-1/2 mask-[radial-gradient(64rem_64rem_at_top,white,transparent)] stroke-gray-200 dark:stroke-gray-700">
+            <defs>
+              <pattern id="e813992c-7d03-4cc4-a2bd-151760b470a0" width="40" height="40" x="100%" y="-1"
+                       patternUnits="userSpaceOnUse">
+                <path d="M40 0v40H0" fill="none" stroke="currentColor" stroke-width="0.5"/>
+              </pattern>
+            </defs>
+            <svg x="50%" y="-1" className="overflow-visible w-full fill-gray-200 dark:fill-gray-800">
+              <path
+                  d="M-100.5 0h201v201h-201Z M699.5 0h201v201h-201Z M499.5 400h201v201h-201Z M-300.5 600h201v201h-201Z"
+                  stroke-width="0"/>
+            </svg>
+            <rect width="100%" height="100%" fill="url(#e813992c-7d03-4cc4-a2bd-151760b470a0)" stroke-width="0"/>
+          </svg>
+        </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
@@ -114,11 +132,35 @@ export default function BlogPage() {
             {/* Search Bar */}
             <div className="max-w-md mx-auto relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
-              <Input placeholder="Rechercher un article..." className="pl-10 bg-background border-border" />
+              <Input placeholder="Rechercher un article..." className="pl-10 bg-background dark:bg-black border-border" />
             </div>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/*
+      <div className="px-6 py-24 sm:py-32 relative rounded-xl overflow-hidden before:absolute before:top-0 w-full before:start-1/2 bg-[url('/squared-bg-light.svg')] before:bg-[url('/squared-bg-light.svg')] dark:bg-[url('/squared-bg-dark.svg')] dark:before:bg-[url('/squared-bg-dark.svg')] bg-no-repeat bg-top :bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
+        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
+
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center max-w-4xl mx-auto">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6 text-balance">
+                Blog <span className="text-primary">Juridique</span>
+              </h1>
+              <p className="text-xl text-muted-foreground mb-8 text-pretty">
+                Actualités, conseils pratiques et analyses juridiques pour vous accompagner dans vos décisions
+              </p>
+
+              {/* Search Bar
+              <div className="max-w-md mx-auto relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Input placeholder="Rechercher un article..." className="pl-10 bg-background dark:bg-black border-border" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      */}
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
