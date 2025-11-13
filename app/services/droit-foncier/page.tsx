@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -6,8 +8,22 @@ import {Scale, MapPin, Home, FileText, Building2, ArrowLeft, Check, Phone, Mail,
 import Link from "next/link"
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import {useState} from "react";
 
 export default function DroitFoncierPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    projectType: "",
+    projectDescription: "",
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState("")
+
+
   const subServices = [
     {
       title: "Acquisitions Immobilières",
@@ -34,6 +50,54 @@ export default function DroitFoncierPage() {
       features: ["Troubles de voisinage", "Servitudes", "Copropriété", "Expropriation"],
     },
   ]
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    // Simple form validation
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.phone || !formData.projectType || !formData.projectDescription) {
+      setSubmitMessage("Veuillez remplir tous les champs requis.")
+      setTimeout(() => setSubmitMessage(""), 3000)
+      return
+    }
+
+    setIsSubmitting(true)
+    setSubmitMessage("Envoi en cours...")
+    const projet = {
+      id: Date.now().toString(),
+      ...formData,
+      date: new Date().toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }),
+      status: "En attente",
+      createdAt: new Date().toISOString(),
+    }
+
+    // Take an existing project from localStorage if any
+    const savedProjets = localStorage.getItem("userProjets")
+    const projets = savedProjets ? JSON.parse(savedProjets) : []
+
+    // Save the new project
+    projets.push(projet)
+    localStorage.setItem("userProjets", JSON.stringify(projets))
+
+    // Reset the form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      projectType: "",
+      projectDescription: "",
+    })
+
+    setIsSubmitting(false)
+    setSubmitMessage("Projet envoyée avec succès !")
+    setTimeout(() => setSubmitMessage(""), 3000)
+
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -157,27 +221,36 @@ export default function DroitFoncierPage() {
                   <CardDescription>Décrivez votre projet immobilier pour un accompagnement sur mesure</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {submitMessage && (
+                      <div className={`p-4 rounded-lg ${
+                          submitMessage.includes("succès")
+                              ? "bg-green-50 text-green-800 border border-green-200"
+                              : "bg-red-50 text-red-800 border border-red-200"
+                      }`}>
+                        {submitMessage}
+                      </div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium text-foreground mb-2 block">Prénom</label>
-                      <Input placeholder="Votre prénom" />
+                      <Input placeholder="Votre prénom" value={formData.firstName} onChange={(e)=> setFormData({...formData, firstName: e.target.value})} />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-2 block">Nom</label>
-                      <Input placeholder="Votre nom" />
+                      <Input placeholder="Votre nom" value={formData.lastName} onChange={(e)=> setFormData({...formData, lastName: e.target.value})} />
                     </div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
-                    <Input type="email" placeholder="votre.email@exemple.com" />
+                    <Input type="email" placeholder="votre.email@exemple.com" value={formData.email} onChange={(e)=> setFormData({...formData, email: e.target.value})} />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Téléphone</label>
-                    <Input type="tel" placeholder="+237 6 00 00 00 " />
+                    <Input type="tel" placeholder="+237 6 00 00 00 " value={formData.phone} onChange={(e)=> setFormData({...formData, phone: e.target.value})} />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Type de projet</label>
-                    <select className="w-full px-3 py-2 border border-border rounded-md bg-input text-foreground">
+                    <select className="w-full px-3 py-2 border border-border rounded-md bg-input text-foreground" value={formData.projectType} onChange={(e)=> setFormData({...formData, projectType: e.target.value})}>
                       <option>Acquisition immobilière</option>
                       <option>Bail commercial</option>
                       <option>Urbanisme</option>
@@ -192,10 +265,12 @@ export default function DroitFoncierPage() {
                     <Textarea
                       placeholder="Décrivez votre projet immobilier, sa localisation, vos objectifs..."
                       rows={4}
+                      value={formData.projectDescription}
+                      onChange={(e)=> setFormData({...formData, projectDescription: e.target.value})}
                     />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Envoyer la demande
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSubmit} disabled={isSubmitting}>
+                    {isSubmitting ? "Envoi en cours..." : "Envoyer la Demande"}
                   </Button>
                 </CardContent>
               </Card>

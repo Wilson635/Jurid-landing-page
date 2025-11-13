@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -6,8 +8,22 @@ import { Scale, Building, Users, TrendingUp, FileText, ArrowLeft, Check, Phone, 
 import Link from "next/link"
 import Header from "@/components/ui/header";
 import Footer from "@/components/ui/footer";
+import {useState} from "react";
 
 export default function DroitSocietesPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    company: "",
+    needType: "Création d'entreprise",
+    projectDescription: "",
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState("")
+
+
   const subServices = [
     {
       title: "Constitution de Sociétés",
@@ -34,6 +50,52 @@ export default function DroitSocietesPage() {
       features: ["Restructurations fiscales", "Apports-fusions", "Scissions", "Transformations"],
     },
   ]
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    //validation simple
+    if (!formData.firstName || !formData.lastName || !formData.email || !formData.company || !formData.projectDescription) {
+      setSubmitMessage("Veuillez remplir tous les champs requis.")
+      setTimeout(() => setSubmitMessage(""), 3000)
+      return
+    }
+
+    setIsSubmitting(true)
+
+    // Send form data to backend
+    const projet = {
+      id: Date.now().toString(),
+      ...formData,
+      date: new Date().toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      }),
+      status: "En attente",
+      createdAt: new Date().toISOString(),
+    }
+
+    // Take an existing project from localStorage if any
+    const savedProjects = localStorage.getItem("userProjects")
+    const projects = savedProjects ? JSON.parse(savedProjects) : []
+
+    // Save the new project
+    projects.push(projet)
+    localStorage.setItem("userProjects", JSON.stringify(projects))
+    setIsSubmitting(false)
+    setSubmitMessage("Votre projet a été envoyée avec succès !")
+    // Reset form
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      company: "",
+      needType: "Création d'entreprise",
+      projectDescription: "",
+    })
+    setTimeout(() => setSubmitMessage(""), 3000)
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -159,27 +221,36 @@ export default function DroitSocietesPage() {
                   <CardDescription>Décrivez votre projet d'entreprise pour un conseil personnalisé</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
+                  {submitMessage && (
+                      <div className={`p-4 rounded-lg ${
+                          submitMessage.includes("succès")
+                              ? "bg-green-50 text-green-800 border border-green-200"
+                              : "bg-red-50 text-red-800 border border-red-200"
+                      }`}>
+                        {submitMessage}
+                      </div>
+                  )}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="text-sm font-medium text-foreground mb-2 block">Prénom</label>
-                      <Input placeholder="Votre prénom" />
+                      <Input placeholder="Votre prénom" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} />
                     </div>
                     <div>
                       <label className="text-sm font-medium text-foreground mb-2 block">Nom</label>
-                      <Input placeholder="Votre nom" />
+                      <Input placeholder="Votre nom" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} />
                     </div>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Email</label>
-                    <Input type="email" placeholder="votre.email@exemple.com" />
+                    <Input type="email" placeholder="votre.email@exemple.com" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Entreprise</label>
-                    <Input placeholder="Nom de votre entreprise (optionnel)" />
+                    <Input placeholder="Nom de votre entreprise (optionnel)" value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} />
                   </div>
                   <div>
                     <label className="text-sm font-medium text-foreground mb-2 block">Type de besoin</label>
-                    <select className="w-full px-3 py-2 border border-border rounded-md bg-input text-foreground">
+                    <select className="w-full px-3 py-2 border border-border rounded-md bg-input text-foreground" value={formData.needType} onChange={(e) => setFormData({ ...formData, needType: e.target.value })}>
                       <option>Création d'entreprise</option>
                       <option>Gouvernance</option>
                       <option>Fusion/Acquisition</option>
@@ -191,10 +262,10 @@ export default function DroitSocietesPage() {
                     <label className="text-sm font-medium text-foreground mb-2 block">
                       Description de votre projet
                     </label>
-                    <Textarea placeholder="Décrivez votre projet d'entreprise et vos objectifs..." rows={4} />
+                    <Textarea placeholder="Décrivez votre projet d'entreprise et vos objectifs..." rows={4} value={formData.projectDescription} onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })} />
                   </div>
-                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
-                    Envoyer la demande
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground" onClick={handleSubmit} disabled={isSubmitting}>
+                    {isSubmitting ? "Envoi en cours..." : "Envoyer la demande"}
                   </Button>
                 </CardContent>
               </Card>
