@@ -36,6 +36,24 @@ export default function AdminDashboard() {
         consultations: 0,
       })
     }
+
+    const saveConsultations = localStorage.getItem("adminConsultations")
+    if (saveConsultations) {
+      const consultations = JSON.parse(saveConsultations)
+      setStats((prevStats) => ({
+        ...prevStats,
+        consultations: consultations.length,
+      }))
+    }
+
+    const savedData = localStorage.getItem("adminDemands")
+    if (savedData) {
+      const adminData = JSON.parse(savedData)
+      setStats((prevStats) => ({
+        ...prevStats,
+        consultations: adminData.length + prevStats.consultations || prevStats.consultations,
+      }))
+    }
   }, [])
 
   const handleLogout = () => {

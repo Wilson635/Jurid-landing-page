@@ -81,6 +81,7 @@ export default function DroitFinancierPage() {
       }),
       status: "En attente",
       createdAt: new Date().toISOString(),
+      service: "Droit Financier & Bancaire",
     }
 
     // Take an existing array from localStorage, add the new data and save it back

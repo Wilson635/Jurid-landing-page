@@ -74,6 +74,7 @@ export default function DroitSocietesPage() {
       }),
       status: "En attente",
       createdAt: new Date().toISOString(),
+      service: "Droit des Sociétés",
     }
 
     // Take an existing project from localStorage if any

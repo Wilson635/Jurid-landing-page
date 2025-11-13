@@ -70,6 +70,7 @@ export default function ConsultationJuridiquePage() {
     const consultation = {
       id: Date.now().toString(),
       ...formData,
+      message: formData.description,
       date: new Date().toLocaleDateString('fr-FR', {
         day: 'numeric',
         month: 'long',
@@ -77,6 +78,7 @@ export default function ConsultationJuridiquePage() {
       }),
       status: "En attente",
       createdAt: new Date().toISOString(),
+      service: "Consultation Juridique",
     }
 
     // Récupérer les consultations existantes
@@ -364,6 +366,7 @@ export default function ConsultationJuridiquePage() {
                         </li>
                       </ul>
                     </CardContent>
+
                   </Card>
                 </div>
               </div>
