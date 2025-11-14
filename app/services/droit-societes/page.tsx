@@ -78,12 +78,12 @@ export default function DroitSocietesPage() {
     }
 
     // Take an existing project from localStorage if any
-    const savedProjects = localStorage.getItem("userProjects")
+    const savedProjects = localStorage.getItem("adminSocietes")
     const projects = savedProjects ? JSON.parse(savedProjects) : []
 
     // Save the new project
     projects.push(projet)
-    localStorage.setItem("userProjects", JSON.stringify(projects))
+    localStorage.setItem("adminSocietes", JSON.stringify(projects))
     setIsSubmitting(false)
     setSubmitMessage("Votre projet a été envoyée avec succès !")
     // Reset form

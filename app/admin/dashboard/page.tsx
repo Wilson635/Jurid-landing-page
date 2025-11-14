@@ -7,14 +7,15 @@ import {FileText, BarChart3, LogOut, Calendar, TrendingUp, Eye, Users, Moon, Sun
 import Link from "next/link"
 import {useTheme} from "@/hooks/use-theme";
 
-export default function AdminDashboard() {
 
-  const { theme, toggleTheme, mounted } = useTheme()
+export default function AdminDashboard() {
+  const { theme, toggleTheme } = useTheme()
 
   const [stats, setStats] = useState({
     articles: 0,
     published: 0,
     consultations: 0,
+    processedConsultations: 0,
   })
   const [adminName, setAdminName] = useState("Administrateur")
 
@@ -25,35 +26,56 @@ export default function AdminDashboard() {
       return
     }
 
-    // Charger les statistiques
+    // Charger les statistiques des articles
     const savedArticles = localStorage.getItem("adminArticles")
+    let articlesCount = 0
+    let publishedCount = 0
+
     if (savedArticles) {
       const articles = JSON.parse(savedArticles)
-      const published = articles.filter((a: any) => a.published !== false).length
-      setStats({
-        articles: articles.length,
-        published: published,
-        consultations: 0,
-      })
+      articlesCount = articles.length
+      publishedCount = articles.filter((a: any) => a.published !== false).length
     }
 
-    const saveConsultations = localStorage.getItem("adminConsultations")
-    if (saveConsultations) {
-      const consultations = JSON.parse(saveConsultations)
-      setStats((prevStats) => ({
-        ...prevStats,
-        consultations: consultations.length,
-      }))
+    // Charger toutes les consultations
+    let totalConsultations = 0
+    let processedConsultations = 0
+
+    const savedConsultations = localStorage.getItem("adminConsultations")
+    if (savedConsultations) {
+      const consultations = JSON.parse(savedConsultations)
+      totalConsultations += consultations.length
+      processedConsultations += consultations.filter((c: any) => c.status === "Traité").length
     }
 
-    const savedData = localStorage.getItem("adminDemands")
-    if (savedData) {
-      const adminData = JSON.parse(savedData)
-      setStats((prevStats) => ({
-        ...prevStats,
-        consultations: adminData.length + prevStats.consultations || prevStats.consultations,
-      }))
+    const savedDemands = localStorage.getItem("adminDemands")
+    if (savedDemands) {
+      const demands = JSON.parse(savedDemands)
+      totalConsultations += demands.length
+      processedConsultations += demands.filter((d: any) => d.status === "Traité").length
     }
+
+    const savedSociete = localStorage.getItem("adminSocietes")
+    if (savedSociete) {
+      const societe = JSON.parse(savedSociete)
+      totalConsultations += societe.length
+      processedConsultations += societe.filter((s: any) => s.status === "Traité").length
+    }
+
+    const savedFoncier = localStorage.getItem("userProjets")
+    if (savedFoncier) {
+      const foncier = JSON.parse(savedFoncier)
+      totalConsultations += foncier.length
+      processedConsultations += foncier.filter((f: any) => f.status === "Traité").length
+    }
+
+    // Mettre à jour les stats en une seule fois
+    setStats({
+      articles: articlesCount,
+      published: publishedCount,
+      consultations: totalConsultations,
+      processedConsultations: processedConsultations,
+    })
   }, [])
 
   const handleLogout = () => {
@@ -263,7 +285,7 @@ export default function AdminDashboard() {
                   </Link>
                   <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
                     <span>{stats.consultations} demandes</span>
-                    <span>0 traitées</span>
+                    <span>{stats.processedConsultations} traitées</span>
                   </div>
                 </CardContent>
               </Card>
