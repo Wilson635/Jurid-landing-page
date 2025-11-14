@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import {FileText, BarChart3, LogOut, Calendar, TrendingUp, Eye, Users, Moon, Sun} from "lucide-react"
+import {FileText, BarChart3, LogOut, Calendar, TrendingUp, Eye, Users, Moon, Sun, ArrowLeft, Home} from "lucide-react"
 import Link from "next/link"
 import {useTheme} from "@/hooks/use-theme";
 
@@ -111,6 +111,12 @@ export default function AdminDashboard() {
                 <span className="capitalize">{currentDate}</span>
               </div>
               <div className="flex items-center gap-4">
+                <Link href="/">
+                  <Button variant="outline" size="sm" className="border-border backdrop-blur-sm p-5 rounded-none">
+                    <Home className="w-4 h-4 mr-2" />
+                    Revenir sur le site
+                  </Button>
+                </Link>
                 <Button variant="outline" size="sm" onClick={handleLogout} className="p-5 rounded-none border-border">
                   <LogOut className="w-4 h-4 mr-2" />
                   Déconnexion
