@@ -97,6 +97,133 @@ export const translations = {
             }
         },
 
+        // Page À propos
+        about: {
+            hero: {
+                name: "Maître NOFFE",
+                subtitle: "Avocate inscrite aux barreaux du Cameroun et du Nigeria, spécialisée en droit des affaires et en droit des sociétés. Depuis 2014, elle accompagne entreprises et investisseurs sur les mécanismes juridiques, la conformité règlementaire et la gouvernance.",
+                badges: {
+                    business: "Droit des Affaires",
+                    corporate: "Droit des Sociétés",
+                    compliance: "Compliance",
+                    governance: "Corporate Governance",
+                    landLaw: "Droit Foncier & Immobilier"
+                },
+                ctaAppointment: "Prendre Rendez-vous",
+                ctaContact: "Me Contacter",
+                experience: "Années d'expérience"
+            },
+            journey: {
+                title: "Mon Parcours",
+                paragraph1: "Depuis 2014, j'ai choisi de me spécialiser en droit des affaires et en droit des sociétés, avec un intérêt particulier pour les mécanismes juridiques liés au financement et à la sécurisation des investissements. Mon expertise couvre également la conformité règlementaire et administrative des entreprises, le corporate secretarial services, la gestion des contrats, l'audit juridique, ainsi que la résolution des litiges.",
+                paragraph2: "Avocate inscrite aux barreaux du Cameroun et du Nigeria, je possède une double maîtrise du système de la Common Law et du Droit Civil français. Je conseille entreprises et institutions sur des sujets stratégiques de gouvernance et j'ai récemment lancé le podcast \"Le guide des entreprises\", dédié aux dirigeants et entrepreneurs.",
+                paragraph3: "Parallèlement, j'élargis mes compétences dans le domaine du droit foncier, du droit immobilier et du leasing (crédit-bail), avec une formation en gestion de projets (certification PMP en cours). Ces expériences me permettent d'apporter une approche transversale et pragmatique aux problématiques juridiques et économiques de mes clients.",
+                paragraph4: "Ma mission est claire : offrir aux entreprises un accompagnement juridique de haut niveau, transformant la complexité réglementaire en leviers de croissance durable."
+            },
+            values: {
+                title: "Mes Valeurs",
+                subtitle: "Les principes qui guident mon approche professionnelle au quotidien"
+            },
+            experience: {
+                title: "Expérience Professionnelle"
+            },
+            education: {
+                title: "Formation",
+                certifications: "Certifications & Formations"
+            },
+            testimonials: {
+                title: "Témoignages Clients",
+                subtitle: "Ce que disent mes clients de notre collaboration"
+            }
+        },
+
+        // Page Services
+        services: {
+            hero: {
+                title: "Nos",
+                titleHighlight: "Services Juridiques",
+                subtitle: "Une expertise complète dans tous les domaines du droit pour accompagner vos projets personnels et professionnels avec excellence."
+            },
+            expertises: "Nos expertises :",
+            learnMore: "En savoir plus",
+            cards: {
+                consultation: {
+                    title: "Consultation Juridique",
+                    description: "Conseils personnalisés et expertise juridique complète pour tous vos besoins",
+                    items: [
+                        "Rédaction des contrats",
+                        "Création des entreprises",
+                        "Information juridique documentaire",
+                        "Conformité & Ingénierie juridique"
+                    ]
+                },
+                corporate: {
+                    title: "Droit des Sociétés",
+                    description: "Accompagnement dans la création, gestion et développement de votre entreprise",
+                    items: [
+                        "Constitution de sociétés",
+                        "Gouvernance d'entreprise",
+                        "Fusions & acquisitions",
+                        "Restructurations"
+                    ]
+                },
+                financial: {
+                    title: "Droit Financier & Bancaire",
+                    description: "Expertise en matière financière, bancaire et d'investissement",
+                    items: [
+                        "Droit bancaire",
+                        "Crédit bail",
+                        "Investissements",
+                        "Droit boursier"
+                    ]
+                },
+                landLaw: {
+                    title: "Droit Foncier",
+                    description: "Transactions immobilières et expertise foncière complète",
+                    items: [
+                        "Acquisitions immobilières",
+                        "Baux commerciaux",
+                        "Urbanisme",
+                        "Contentieux foncier"
+                    ]
+                }
+            },
+            cta: {
+                title: "Une Question Juridique ?",
+                subtitle: "Nos experts sont à votre disposition pour vous conseiller",
+                freeConsultation: "Consultation Gratuite",
+                contactUs: "Nous Contacter"
+            }
+        },
+
+        // Page Blog
+        blog: {
+            hero: {
+                title: "Blog",
+                titleHighlight: "Juridique",
+                subtitle: "Actualités, conseils pratiques et analyses juridiques pour vous accompagner dans vos décisions",
+                searchPlaceholder: "Rechercher un article..."
+            },
+            sidebar: {
+                categories: "Catégories",
+                popularArticles: "Articles Populaires",
+                allArticles: "Tous les articles"
+            },
+            article: {
+                readTime: "de lecture",
+                by: "Par"
+            },
+            actions: {
+                loadMore: "Charger plus d'articles"
+            },
+            newsletter: {
+                title: "Restez Informé",
+                subtitle: "Recevez nos derniers articles et analyses juridiques directement dans votre boîte mail",
+                emailPlaceholder: "Votre adresse email",
+                subscribe: "S'abonner"
+            }
+        },
+
         // Dashboard
         dashboard: {
             title: "Bienvenue",
@@ -305,6 +432,133 @@ export const translations = {
                 subtitle: "Contact us today for a personalized consultation",
                 call: "Call Now",
                 email: "Send an Email"
+            }
+        },
+
+        // About page
+        about: {
+            hero: {
+                name: "Attorney NOFFE",
+                subtitle: "Lawyer registered at the Cameroon and Nigeria bars, specialized in business law and corporate law. Since 2014, she has been supporting companies and investors in legal mechanisms, regulatory compliance and governance.",
+                badges: {
+                    business: "Business Law",
+                    corporate: "Corporate Law",
+                    compliance: "Compliance",
+                    governance: "Corporate Governance",
+                    landLaw: "Land & Real Estate Law"
+                },
+                ctaAppointment: "Schedule Appointment",
+                ctaContact: "Contact Me",
+                experience: "Years of experience"
+            },
+            journey: {
+                title: "My Journey",
+                paragraph1: "Since 2014, I have chosen to specialize in business law and corporate law, with a particular interest in legal mechanisms related to financing and securing investments. My expertise also covers regulatory and administrative compliance for companies, corporate secretarial services, contract management, legal audits, and dispute resolution.",
+                paragraph2: "As a lawyer registered at the bars of Cameroon and Nigeria, I have a dual mastery of the Common Law system and French Civil Law. I advise companies and institutions on strategic governance issues and recently launched the podcast \"The Business Guide\", dedicated to leaders and entrepreneurs.",
+                paragraph3: "At the same time, I am expanding my skills in land law, real estate law and leasing, with training in project management (PMP certification in progress). These experiences allow me to bring a cross-functional and pragmatic approach to the legal and economic challenges of my clients.",
+                paragraph4: "My mission is clear: to provide companies with high-level legal support, transforming regulatory complexity into drivers of sustainable growth."
+            },
+            values: {
+                title: "My Values",
+                subtitle: "The principles that guide my professional approach daily"
+            },
+            experience: {
+                title: "Professional Experience"
+            },
+            education: {
+                title: "Education",
+                certifications: "Certifications & Training"
+            },
+            testimonials: {
+                title: "Client Testimonials",
+                subtitle: "What my clients say about our collaboration"
+            }
+        },
+
+        // Services page
+        services: {
+            hero: {
+                title: "Our",
+                titleHighlight: "Legal Services",
+                subtitle: "Complete expertise in all areas of law to support your personal and professional projects with excellence."
+            },
+            expertises: "Our expertise:",
+            learnMore: "Learn more",
+            cards: {
+                consultation: {
+                    title: "Legal Consultation",
+                    description: "Personalized advice and comprehensive legal expertise for all your needs",
+                    items: [
+                        "Contract drafting",
+                        "Business formation",
+                        "Legal documentary information",
+                        "Compliance & Legal engineering"
+                    ]
+                },
+                corporate: {
+                    title: "Corporate Law",
+                    description: "Support in the creation, management and development of your company",
+                    items: [
+                        "Company formation",
+                        "Corporate governance",
+                        "Mergers & acquisitions",
+                        "Restructuring"
+                    ]
+                },
+                financial: {
+                    title: "Financial & Banking Law",
+                    description: "Expertise in financial, banking and investment matters",
+                    items: [
+                        "Banking law",
+                        "Leasing",
+                        "Investments",
+                        "Securities law"
+                    ]
+                },
+                landLaw: {
+                    title: "Land Law",
+                    description: "Real estate transactions and comprehensive land expertise",
+                    items: [
+                        "Real estate acquisitions",
+                        "Commercial leases",
+                        "Urban planning",
+                        "Land disputes"
+                    ]
+                }
+            },
+            cta: {
+                title: "A Legal Question?",
+                subtitle: "Our experts are at your disposal to advise you",
+                freeConsultation: "Free Consultation",
+                contactUs: "Contact Us"
+            }
+        },
+
+        // Blog page
+        blog: {
+            hero: {
+                title: "Legal",
+                titleHighlight: "Blog",
+                subtitle: "News, practical advice and legal analysis to support you in your decisions",
+                searchPlaceholder: "Search for an article..."
+            },
+            sidebar: {
+                categories: "Categories",
+                popularArticles: "Popular Articles",
+                allArticles: "All articles"
+            },
+            article: {
+                readTime: "read",
+                by: "By"
+            },
+            actions: {
+                loadMore: "Load more articles"
+            },
+            newsletter: {
+                title: "Stay Informed",
+                subtitle: "Receive our latest articles and legal analysis directly in your inbox",
+                emailPlaceholder: "Your email address",
+                subscribe: "Subscribe"
             }
         },
 

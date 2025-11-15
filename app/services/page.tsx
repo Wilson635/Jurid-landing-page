@@ -1,53 +1,48 @@
+"use client"
+
 import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {ArrowRight, Building, Landmark, MapPin, Scale} from "lucide-react"
 import Link from "next/link"
-import Header from "@/components/ui/header";
-import Footer from "@/components/ui/footer";
+import Header from "@/components/ui/header"
+import Footer from "@/components/ui/footer"
+import { useTranslation } from "@/hooks/use-translation"
 
 export default function ServicesPage() {
+  const { t } = useTranslation()
+
   const services = [
     {
-      title: "Consultation Juridique",
-      description: "Conseils personnalisés et expertise juridique complète pour tous vos besoins",
+      title: t.services.cards.consultation.title,
+      description: t.services.cards.consultation.description,
       icon: Scale,
       href: "/services/consultation-juridique",
       color: "bg-primary/10 text-primary",
-      subServices: [
-        "Rédaction des contrats",
-        "Création des entreprises",
-        "Information juridique documentaire",
-        "Conformité & Ingénierie juridique",
-      ],
+      subServices: t.services.cards.consultation.items,
     },
     {
-      title: "Droit des Sociétés",
-      description: "Accompagnement dans la création, gestion et développement de votre entreprise",
+      title: t.services.cards.corporate.title,
+      description: t.services.cards.corporate.description,
       icon: Building,
       href: "/services/droit-societes",
-      color: "bg-primary/10 text-primary", /*"bg-accent/10 text-accent"*/
-      subServices: [
-        "Constitution de sociétés",
-        "Gouvernance d'entreprise",
-        "Fusions & acquisitions",
-        "Restructurations",
-      ],
+      color: "bg-primary/10 text-primary",
+      subServices: t.services.cards.corporate.items,
     },
     {
-      title: "Droit Financier & Bancaire",
-      description: "Expertise en matière financière, bancaire et d'investissement",
+      title: t.services.cards.financial.title,
+      description: t.services.cards.financial.description,
       icon: Landmark,
       href: "/services/droit-financier",
       color: "bg-primary/10 text-primary",
-      subServices: ["Droit bancaire", "Crédit bail", "Investissements", "Droit boursier"],
+      subServices: t.services.cards.financial.items,
     },
     {
-      title: "Droit Foncier",
-      description: "Transactions immobilières et expertise foncière complète",
+      title: t.services.cards.landLaw.title,
+      description: t.services.cards.landLaw.description,
       icon: MapPin,
       href: "/services/droit-foncier",
-      color: "bg-primary/10 text-primary", /*"bg-accent/10 text-accent"*/
-      subServices: ["Acquisitions immobilières", "Baux commerciaux", "Urbanisme", "Contentieux foncier"],
+      color: "bg-primary/10 text-primary",
+      subServices: t.services.cards.landLaw.items,
     },
   ]
 
@@ -55,41 +50,6 @@ export default function ServicesPage() {
       <div className="min-h-screen bg-background">
         {/* Header */}
         <Header/>
-        {/*<header className="bg-card border-b border-border sticky top-0 z-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center">
-              <Link href="/" className="flex items-center gap-2">
-                <Scale className="w-8 h-8 text-primary" />
-                <span className="text-xl font-bold text-foreground">Cabinet Juridique</span>
-              </Link>
-            </div>
-            <nav className="hidden md:block">
-              <div className="ml-10 flex items-baseline space-x-8">
-                <Link href="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
-                </Link>
-                <Link href="/services" className="text-foreground hover:text-primary transition-colors font-medium">
-                  Services
-                </Link>
-                <Link href="/blog" className="text-muted-foreground hover:text-primary transition-colors">
-                  Blog
-                </Link>
-                <Link href="/boutique" className="text-muted-foreground hover:text-primary transition-colors">
-                  Boutique
-                </Link>
-                <Link href="/apropos" className="text-muted-foreground hover:text-primary transition-colors">
-                  À Propos
-                </Link>
-                <Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </div>
-            </nav>
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">Consultation Gratuite</Button>
-          </div>
-        </div>
-      </header>*/}
 
 
         <div className="relative isolate overflow-hidden bg-white dark:bg-black px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
@@ -113,11 +73,10 @@ export default function ServicesPage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-4xl mx-auto">
               <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-                Nos <span className="text-primary">Services Juridiques</span>
+                {t.services.hero.title} <span className="text-primary">{t.services.hero.titleHighlight}</span>
               </h1>
               <p className="text-xl text-muted-foreground mb-8">
-                Une expertise complète dans tous les domaines du droit pour accompagner vos projets personnels et
-                professionnels avec excellence.
+                {t.services.hero.subtitle}
               </p>
             </div>
           </div>
@@ -143,7 +102,7 @@ export default function ServicesPage() {
                       </CardHeader>
                       <CardContent>
                         <div className="space-y-3 mb-6">
-                          <h4 className="font-semibold text-foreground">Nos expertises :</h4>
+                          <h4 className="font-semibold text-foreground">{t.services.expertises}</h4>
                           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                             {service.subServices.map((subService, subIndex) => (
                                 <li key={subIndex} className="flex items-center text-sm text-muted-foreground">
@@ -156,7 +115,7 @@ export default function ServicesPage() {
                         <Link href={service.href}>
                           <Button
                               className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                            En savoir plus
+                            {t.services.learnMore}
                             <ArrowRight className="w-4 h-4 ml-2"/>
                           </Button>
                         </Link>
@@ -169,37 +128,11 @@ export default function ServicesPage() {
         </section>
 
         {/* CTA Section */}
-        {/*<section className="relative py-16 bg-gradient-to-br from-black via-black to-black/50 text-primary-foreground overflow-hidden">
-
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Une Question Juridique ?</h2>
-          <p className="text-xl mb-8 opacity-90">
-            Nos experts sont à votre disposition pour vous conseiller
-          </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-                size="lg"
-                variant="secondary"
-                className="bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              Consultation Gratuite
-            </Button>
-            <Button
-                size="lg"
-                variant="outline"
-                className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
-            >
-              Nous Contacter
-            </Button>
-          </div>
-        </div>
-      </section>*/}
-
         <div className="relative py-16  overflow-hidden bg-black isolate">
           <div className="container mx-auto px-4 sm:px-6 text-white lg:px-8 text-center">
-            <h2 className="text-3xl font-bold mb-4">Une Question Juridique ?</h2>
+            <h2 className="text-3xl font-bold mb-4">{t.services.cta.title}</h2>
             <p className="text-xl mb-8 opacity-90">
-              Nos experts sont à votre disposition pour vous conseiller
+              {t.services.cta.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button
@@ -207,14 +140,14 @@ export default function ServicesPage() {
                   variant="secondary"
                   className="bg-accent text-accent-foreground hover:bg-accent/90"
               >
-                Consultation Gratuite
+                {t.services.cta.freeConsultation}
               </Button>
               <Button
                   size="lg"
                   variant="outline"
                   className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary bg-transparent"
               >
-                Nous Contacter
+                {t.services.cta.contactUs}
               </Button>
             </div>
           </div>

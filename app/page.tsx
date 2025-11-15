@@ -12,7 +12,7 @@ import {
   BookOpen,
   Phone,
   Mail,
-  MapPin,
+  MapPin, Languages,
 } from "lucide-react"
 import Link from "next/link"
 import Footer from "@/components/ui/footer"
@@ -20,12 +20,26 @@ import Header from "@/components/ui/header"
 import { useTranslation } from "@/hooks/use-translation"
 
 export default function LegalHomePage() {
-  const { t, toggleLanguage } = useTranslation()
+  const { t, toggleLanguage, language } = useTranslation()
 
   return (
-      <div className="min-h-screen bg-background" onReset={toggleLanguage}>
+      <div className="min-h-screen bg-background" >
         {/* Header */}
-        <Header />
+        <div className="items-center justify-center gap-4">
+          <Header />
+          <div className="hidden">
+            <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleLanguage}
+                className="border-border p-5"
+                title={language === "fr" ? t.switchToEnglish : t.switchToFrench}
+            >
+              <Languages className="h-4 w-4 mr-1" />
+              <span className="font-semibold text-xs">{language === "fr" ? "EN" : "FR"}</span>
+            </Button>
+          </div>
+        </div>
 
         {/* Hero Section */}
         <section className="px-6 py-24 sm:py-32 relative rounded-xl overflow-hidden before:absolute before:top-0 w-full before:start-1/2 bg-[url('/polygon-bg-light.svg')] before:bg-[url('/polygon-bg-light.svg')] dark:bg-[url('/polygon-bg-element.svg')] dark:before:bg-[url('/polygon-bg-element.svg')] bg-no-repeat bg-top :bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
