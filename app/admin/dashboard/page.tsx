@@ -3,13 +3,14 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import {FileText, BarChart3, LogOut, Calendar, TrendingUp, Eye, Users, Moon, Sun, ArrowLeft, Home} from "lucide-react"
+import { FileText, BarChart3, LogOut, Calendar, TrendingUp, Eye, Users, Moon, Sun, Home, Languages } from "lucide-react"
 import Link from "next/link"
-import {useTheme} from "@/hooks/use-theme";
-
+import { useTheme } from "@/hooks/use-theme"
+import { useTranslation } from "@/hooks/use-translation"
 
 export default function AdminDashboard() {
   const { theme, toggleTheme } = useTheme()
+  const { t, language, toggleLanguage } = useTranslation()
 
   const [stats, setStats] = useState({
     articles: 0,
@@ -84,11 +85,11 @@ export default function AdminDashboard() {
     window.location.href = "/admin"
   }
 
-  const currentDate = new Date().toLocaleDateString('fr-FR', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  const currentDate = new Date().toLocaleDateString(language === "fr" ? "fr-FR" : "en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 
   return (
@@ -97,10 +98,13 @@ export default function AdminDashboard() {
         <div className="relative bg-gradient-to-br from-primary/10 via-background to-accent/10 border-b border-border overflow-hidden">
           {/* Decorative Pattern */}
           <div className="absolute inset-0 opacity-30">
-            <div className="absolute inset-0" style={{
-              backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
-              backgroundSize: '50px 50px'
-            }}></div>
+            <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `radial-gradient(circle at 2px 2px, currentColor 1px, transparent 0)`,
+                  backgroundSize: "50px 50px",
+                }}
+            ></div>
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -110,24 +114,35 @@ export default function AdminDashboard() {
                 <Calendar className="w-4 h-4" />
                 <span className="capitalize">{currentDate}</span>
               </div>
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3">
                 <Link href="/">
-                  <Button variant="outline" size="sm" className="border-border backdrop-blur-sm p-5 rounded-none">
+                  <Button variant="outline" size="sm" className="border-border backdrop-blur-sm">
                     <Home className="w-4 h-4 mr-2" />
-                    Revenir sur le site
+                    {t.backToSite}
                   </Button>
                 </Link>
-                <Button variant="outline" size="sm" onClick={handleLogout} className="p-5 rounded-none border-border">
+                <Button variant="outline" size="sm" onClick={handleLogout} className="border-border">
                   <LogOut className="w-4 h-4 mr-2" />
-                  Déconnexion
+                  {t.logout}
                 </Button>
                 <Button
                     variant="outline"
-                    className="p-5 rounded-none"
+                    size="sm"
                     onClick={toggleTheme}
-                    title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                    className="border-border"
+                    title={theme === "light" ? t.switchToDark : t.switchToLight}
                 >
-                  {theme === "light" ? <Moon className="h-6 w-6 " /> : <Sun className="h-6 w-6" />}
+                  {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                </Button>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={toggleLanguage}
+                    className="border-border"
+                    title={language === "fr" ? t.switchToEnglish : t.switchToFrench}
+                >
+                  <Languages className="h-4 w-4 mr-1" />
+                  <span className="font-semibold text-xs">{language === "fr" ? "EN" : "FR"}</span>
                 </Button>
               </div>
             </div>
@@ -136,11 +151,9 @@ export default function AdminDashboard() {
             <div className="py-12 md:py-16">
               <div className="max-w-3xl">
                 <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-                  Bienvenue, <span className="text-primary">{adminName}</span>
+                  {t.dashboard.title}, <span className="text-primary">{adminName}</span>
                 </h1>
-                <p className="text-xl text-muted-foreground mb-8">
-                  Gérez votre contenu et suivez l'activité de votre cabinet juridique depuis votre tableau de bord
-                </p>
+                <p className="text-xl text-muted-foreground mb-8">{t.dashboard.subtitle}</p>
 
                 {/* Quick Stats Bar */}
                 <div className="grid grid-cols-3 gap-4">
@@ -149,21 +162,21 @@ export default function AdminDashboard() {
                       <FileText className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.articles}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Articles total</p>
+                    <p className="text-xs text-muted-foreground">{t.dashboard.articlesTotal}</p>
                   </div>
                   <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-4">
                     <div className="flex items-center gap-2 text-primary mb-1">
                       <Eye className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.published}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Publiés</p>
+                    <p className="text-xs text-muted-foreground">{t.dashboard.published}</p>
                   </div>
                   <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-4">
                     <div className="flex items-center gap-2 text-primary mb-1">
                       <Users className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.consultations}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Demandes</p>
+                    <p className="text-xs text-muted-foreground">{t.dashboard.requests}</p>
                   </div>
                 </div>
               </div>
@@ -175,7 +188,7 @@ export default function AdminDashboard() {
         <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {/* Statistics Cards */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-foreground mb-6">Statistiques</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">{t.dashboard.statistics}</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card className="border-border hover:shadow-lg transition-all py-6">
                 <CardHeader className="pb-3">
@@ -184,7 +197,7 @@ export default function AdminDashboard() {
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <FileText className="w-5 h-5 text-primary" />
                     </div>
-                    Articles
+                    {t.dashboard.articles}
                   </span>
                     <TrendingUp className="w-4 h-4 text-green-500" />
                   </CardTitle>
@@ -192,8 +205,10 @@ export default function AdminDashboard() {
                 <CardContent>
                   <p className="text-4xl font-bold text-foreground mb-2">{stats.articles}</p>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Total créés</span>
-                    <span className="text-green-600 font-medium">{stats.published} publiés</span>
+                    <span className="text-muted-foreground">{t.dashboard.totalCreated}</span>
+                    <span className="text-green-600 font-medium">
+                    {stats.published} {t.dashboard.published.toLowerCase()}
+                  </span>
                   </div>
                 </CardContent>
               </Card>
@@ -205,15 +220,15 @@ export default function AdminDashboard() {
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <Users className="w-5 h-5 text-primary" />
                     </div>
-                    Demandes
+                    {t.dashboard.requests}
                   </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-4xl font-bold text-foreground mb-2">{stats.consultations}</p>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Consultations</span>
-                    <span className="text-muted-foreground">En attente</span>
+                    <span className="text-muted-foreground">{t.dashboard.consultations}</span>
+                    <span className="text-muted-foreground">{t.dashboard.pending}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -225,17 +240,15 @@ export default function AdminDashboard() {
                     <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
                       <BarChart3 className="w-5 h-5 text-primary" />
                     </div>
-                    Activité
+                    {t.dashboard.activity}
                   </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-4xl font-bold text-foreground mb-2">
-                    {stats.articles + stats.consultations}
-                  </p>
+                  <p className="text-4xl font-bold text-foreground mb-2">{stats.articles + stats.consultations}</p>
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Total actions</span>
-                    <span className="text-blue-600 font-medium">Ce mois</span>
+                    <span className="text-muted-foreground">{t.dashboard.totalActions}</span>
+                    <span className="text-blue-600 font-medium">{t.dashboard.thisMonth}</span>
                   </div>
                 </CardContent>
               </Card>
@@ -244,7 +257,7 @@ export default function AdminDashboard() {
 
           {/* Management Sections */}
           <div>
-            <h2 className="text-2xl font-bold text-foreground mb-6">Gestion du Contenu</h2>
+            <h2 className="text-2xl font-bold text-foreground mb-6">{t.dashboard.contentManagement}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <Card className="border-border hover:shadow-xl transition-all group py-6">
                 <CardHeader className="space-y-3">
@@ -252,21 +265,23 @@ export default function AdminDashboard() {
                     <FileText className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl mb-2">Gestion des Articles</CardTitle>
-                    <CardDescription>
-                      Créer, éditer, supprimer ou publier les articles du blog juridique
-                    </CardDescription>
+                    <CardTitle className="text-xl mb-2">{t.dashboard.articlesManagement}</CardTitle>
+                    <CardDescription>{t.dashboard.articlesManagementDesc}</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/articles">
                     <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-11">
-                      Gérer les Articles →
+                      {t.dashboard.manageArticles}
                     </Button>
                   </Link>
                   <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-                    <span>{stats.articles} articles</span>
-                    <span>{stats.published} publiés</span>
+                  <span>
+                    {stats.articles} {t.dashboard.articles.toLowerCase()}
+                  </span>
+                    <span>
+                    {stats.published} {t.dashboard.published.toLowerCase()}
+                  </span>
                   </div>
                 </CardContent>
               </Card>
@@ -277,21 +292,23 @@ export default function AdminDashboard() {
                     <Users className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <CardTitle className="text-xl mb-2">Demandes de Consultation</CardTitle>
-                    <CardDescription>
-                      Consulter et gérer les demandes reçues depuis les formulaires du site
-                    </CardDescription>
+                    <CardTitle className="text-xl mb-2">{t.dashboard.consultationRequests}</CardTitle>
+                    <CardDescription>{t.dashboard.consultationRequestsDesc}</CardDescription>
                   </div>
                 </CardHeader>
                 <CardContent>
                   <Link href="/admin/consultations">
                     <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground h-11">
-                      Voir les Demandes →
+                      {t.dashboard.viewRequests}
                     </Button>
                   </Link>
                   <div className="mt-4 flex items-center justify-between text-sm text-muted-foreground">
-                    <span>{stats.consultations} demandes</span>
-                    <span>{stats.processedConsultations} traitées</span>
+                  <span>
+                    {stats.consultations} {t.dashboard.requests.toLowerCase()}
+                  </span>
+                    <span>
+                    {stats.processedConsultations} {t.dashboard.processed}
+                  </span>
                   </div>
                 </CardContent>
               </Card>
@@ -302,20 +319,20 @@ export default function AdminDashboard() {
           <div className="mt-12 bg-gradient-to-r from-primary/5 to-accent/5 rounded-xl p-6 border border-border">
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div>
-                <h3 className="text-lg font-semibold text-foreground mb-1">Actions Rapides</h3>
-                <p className="text-sm text-muted-foreground">Accédez rapidement aux fonctionnalités principales</p>
+                <h3 className="text-lg font-semibold text-foreground mb-1">{t.dashboard.quickActions}</h3>
+                <p className="text-sm text-muted-foreground">{t.dashboard.quickActionsDesc}</p>
               </div>
               <div className="flex gap-3">
                 <Link href="/admin/articles">
                   <Button variant="outline" className="border-border">
                     <FileText className="w-4 h-4 mr-2" />
-                    Nouvel Article
+                    {t.dashboard.newArticle}
                   </Button>
                 </Link>
                 <Link href="/blog">
                   <Button variant="outline" className="border-border">
                     <Eye className="w-4 h-4 mr-2" />
-                    Voir le Blog
+                    {t.dashboard.viewBlog}
                   </Button>
                 </Link>
               </div>

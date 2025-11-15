@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import {usePathname} from "next/navigation"
-import {Instagram, Linkedin, Menu, Moon, Scale, Sun, Twitter, Youtube,} from "lucide-react"
+import {Instagram, Languages, Linkedin, Menu, Moon, Scale, Sun, Twitter, Youtube,} from "lucide-react"
 import {useTheme} from "@/hooks/use-theme";
 import {Button} from "@/components/ui/button";
 import {
@@ -12,13 +12,14 @@ import {
     DropdownMenuLabel, DropdownMenuSeparator,
     DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu";
+import {useTranslation} from "@/hooks/use-translation";
 
 const navItems = [
     {href: "/apropos", label: "À propos"},
     {href: "/services", label: "Services"},
     {href: "/blog", label: "Blog"},
-    {href: "/projets", label: "Projets"},
-    {href: "/accessoires", label: "Accessoires"},
+    /*{href: "/projets", label: "Projets"},
+    {href: "/accessoires", label: "Accessoires"},*/
 ]
 
 const socialLinks = [
@@ -32,6 +33,7 @@ const Header = () => {
     const pathname = usePathname()
 
     const { theme, toggleTheme, mounted } = useTheme()
+    const { t, language, toggleLanguage } = useTranslation()
 
     if (!mounted) return null
 
@@ -41,15 +43,15 @@ const Header = () => {
 
                 {/* Avatar / Logo */}
                 <div className="flex items-center">
-                    <Link href="/" className="border p-1">
-                        <Scale className="w-8 h-8 text-primary p-2  bg-primary/10"/>
+                    <Link href="/" className="border rounded-md p-1">
+                        <Scale className="w-8 h-8 text-primary p-2 rounded-md bg-primary/10"/>
                     </Link>
                 </div>
 
                 {/* Navigation */}
                 <div className="p-[1px] w-fit mx-auto flex items-center">
                     {/* Desktop Navigation */}
-                    <nav className="hidden border md:block">
+                    <nav className="hidden border rounded-md md:block">
                         <div className="items-center px-4 py-2.5">
                             <div className="flex items-center space-x-6 group">
                                 {navItems.map((item) => {
@@ -93,7 +95,7 @@ const Header = () => {
                         ))}
                         <Link
                             href="mailto:contact@exemple.com"
-                            className="px-3 py-2.5 border text-sm hover:bg-accent transition"
+                            className="px-3 py-2.5 border rounded-md text-sm hover:bg-accent transition"
                         >
                             Par Mail
                         </Link>
@@ -106,7 +108,7 @@ const Header = () => {
                     {/*  Toggle Theme */}
                     <Button
                         variant="outline"
-                        className="p-5 rounded-none"
+                        className="p-5 rounded-md"
                         onClick={toggleTheme}
                         title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
                     >
@@ -116,16 +118,21 @@ const Header = () => {
                     {/* Toggle Translation */}
                     <Button
                         variant="outline"
-                        className="p-5 rounded-none"
+                        size="sm"
+                        onClick={toggleLanguage}
+                        className="border-border p-5"
+                        title={language === "fr" ? t.switchToEnglish : t.switchToFrench}
                     >
-                        <span className="text-primary">FR</span>
+                        <Languages className="h-4 w-4 mr-1" />
+                        <span className="font-semibold text-xs">{language === "fr" ? "EN" : "FR"}</span>
                     </Button>
+
 
                     {/* Mobile Navigation */}
                     <nav className="md:hidden block">
                         <DropdownMenu>
                             <DropdownMenuTrigger>
-                                <Button className="p-5 rounded-none">
+                                <Button className="p-5 rounded-md">
                                     <Menu className="h-5 w-5" />
                                     <span className="sr-only">Ouvrir le menu</span>
                                 </Button>

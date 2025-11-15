@@ -1,10 +1,6 @@
-import {
-    Scale,
-    Phone,
-    Mail,
-    MapPin,
-} from "lucide-react"
+"use client";
 import Link from "next/link"
+import {useTranslation} from "@/hooks/use-translation";
 
 const navItems = [
     { href: "/apropos", label: "À propos" },
@@ -12,13 +8,14 @@ const navItems = [
     { href: "/services", label: "Services" },
     { href: "", label: "✦" },
     { href: "/blog", label: "Blog" },
-    { href: "", label: "✦" },
+    /*{ href: "", label: "✦" },
     { href: "/projets", label: "Projets" },
     { href: "", label: "✦" },
-    { href: "/accessoires", label: "Accessoires" },
+    { href: "/accessoires", label: "Accessoires" },*/
 ]
 
 const Footer = () => {
+    const { t, language, toggleLanguage } = useTranslation()
 
     const getCurrentYear = () => {
         return new Date().getFullYear();

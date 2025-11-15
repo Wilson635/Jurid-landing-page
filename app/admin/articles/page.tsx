@@ -20,10 +20,12 @@ import {
   List,
   ListOrdered,
   Link2,
-  Calendar, LogOut, Moon, Sun, Users, Clock, CheckCircle2
+  Calendar, LogOut, Moon, Sun, Users, Clock, CheckCircle2, Languages
 } from "lucide-react"
 import Link from "next/link";
 import {useTheme} from "@/hooks/use-theme";
+import {useTranslation} from "@/hooks/use-translation";
+import {Close} from "@radix-ui/react-toast";
 
 interface Article {
   id: string
@@ -48,6 +50,7 @@ export default function ArticlesPage() {
   const contentRef = useRef<HTMLTextAreaElement>(null)
 
   const { theme, toggleTheme } = useTheme()
+  const { t, language, toggleLanguage } = useTranslation()
 
   const [formData, setFormData] = useState({
     title: "",
@@ -131,7 +134,7 @@ export default function ArticlesPage() {
 
   const handleSaveArticle = () => {
     if (!formData.title || !formData.excerpt || !formData.content) {
-      alert("Veuillez remplir tous les champs obligatoires")
+      alert(t.articles.fillRequired)
       return
     }
 
@@ -174,7 +177,7 @@ export default function ArticlesPage() {
   }
 
   const handleDeleteArticle = (id: string) => {
-    if (confirm("Êtes-vous sûr de vouloir supprimer cet article ?")) {
+    if (confirm(t.articles.deleteConfirm)) {
       const updated = articles.filter((a) => a.id !== id)
       setArticles(updated)
       localStorage.setItem("adminArticles", JSON.stringify(updated))
@@ -204,11 +207,11 @@ export default function ArticlesPage() {
     setShowForm(true)
   }
 
-  const currentDate = new Date().toLocaleDateString('fr-FR', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  const currentDate = new Date().toLocaleDateString(language === "fr" ? "fr-FR" : "en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 
   const handleLogout = () => {
@@ -235,7 +238,7 @@ export default function ArticlesPage() {
               <Link href="/admin/dashboard">
                 <Button variant="outline" size="sm" className="border-border backdrop-blur-sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Retour au tableau de bord
+                  {t.backToDashboard}
                 </Button>
               </Link>
               {/* Top Bar */}
@@ -245,27 +248,28 @@ export default function ArticlesPage() {
                   <span className="capitalize">{currentDate}</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <Button variant="outline" size="sm" onClick={handleLogout} className="p-5 backdrop-blur-sm rounded-none border-border">
+                  <Button variant="outline" size="sm" onClick={handleLogout} className="backdrop-blur-sm border-border">
                     <LogOut className="w-4 h-4 mr-2" />
-                    Déconnexion
+                    {t.logout}
                   </Button>
                   <Button
                       variant="outline"
-                      className="p-5 rounded-none"
+                      size="sm"
                       onClick={toggleTheme}
-                      title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                      className="border-border backdrop-blur-sm"
+                      title={theme === "light" ? t.switchToDark : t.switchToLight}
                   >
-                    {theme === "light" ? <Moon className="h-6 w-6 " /> : <Sun className="h-6 w-6" />}
+                    {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
                   </Button>
                   <Button
-                      onClick={() => {
-                        setShowForm(!showForm)
-                        if (showForm) resetForm()
-                      }}
-                      className="bg-black rounded-none hover:bg-black/90 dark:bg-white dark:hover:bg-white/90 dark:text-black text-white"
+                      variant="outline"
+                      size="sm"
+                      onClick={toggleLanguage}
+                      className="border-border backdrop-blur-sm"
+                      title={language === "fr" ? t.switchToEnglish : t.switchToFrench}
                   >
-                    <Plus className="w-4 h-4 mr-2" />
-                    Nouvel Article
+                    <Languages className="h-4 w-4 mr-1" />
+                    <span className="font-semibold text-xs">{language === "fr" ? "EN" : "FR"}</span>
                   </Button>
                 </div>
               </div>
@@ -278,14 +282,27 @@ export default function ArticlesPage() {
                     <ListOrdered className="w-6 h-6 text-primary" />
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                    Gestion des <span className="text-primary">Articles</span>
+                    {t.articles.title}
                   </h1>
                 </div>
                 <p className="text-xl text-muted-foreground mb-8">
-                    Créez, modifiez et gérez les articles de votre blog juridique depuis ce tableau de bord intuitif.
+                  {t.articles.subtitle}
                 </p>
 
               </div>
+            </div>
+
+            <div className="flex items-center justify-end pb-4">
+              <Button
+                  onClick={() => {
+                    setShowForm(!showForm)
+                    if (showForm) resetForm()
+                  }}
+                  className="bg-black rounded-none hover:bg-black/90 dark:bg-white dark:hover:bg-white/90 dark:text-black text-white"
+              >
+                {showForm ? null : <Plus className="w-4 h-4 mr-2" />}
+                {showForm ? t.cancel : t.articles.newArticle}
+              </Button>
             </div>
           </div>
         </div>
@@ -294,10 +311,10 @@ export default function ArticlesPage() {
           {showForm && (
               <Card className="mb-8 shadow-lg">
                 <CardHeader className="bg-gradient-to-r from-black/10 to-black/10 border-b py-2.5">
-                  <CardTitle className="text-2xl">{editingId ? "Modifier l'article" : "Créer un nouvel article"}</CardTitle>
+                  <CardTitle className="text-2xl">{editingId ? t.articles.editArticle : t.articles.createArticle}</CardTitle>
                   {slug && (
                       <p className="text-sm text-gray-600 mt-2">
-                        URL: <code className="bg-white px-3 py-1 rounded border text-black">/{slug}</code>
+                        {t.articles.url}: <code className="bg-white px-3 py-1 rounded border text-black">/{slug}</code>
                       </p>
                   )}
                 </CardHeader>
@@ -305,7 +322,7 @@ export default function ArticlesPage() {
                   {/* Image Upload Section */}
                   <div className="bg-gray-50 p-6 rounded-lg border-2 border-dashed border-gray-300">
                     <label className="block text-sm font-semibold text-gray-700 mb-3">
-                      Image de couverture
+                      {t.articles.coverImage}
                     </label>
 
                     {imagePreview ? (
@@ -322,7 +339,7 @@ export default function ArticlesPage() {
                               className="absolute top-2 right-2"
                           >
                             <X className="w-4 h-4 mr-1" />
-                            Supprimer
+                            {t.articles.remove}
                           </Button>
                         </div>
                     ) : (
@@ -331,8 +348,8 @@ export default function ArticlesPage() {
                             className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center cursor-pointer hover:border-blue-500 hover:bg-blue-50 transition-colors"
                         >
                           <Upload className="w-12 h-12 mx-auto text-gray-400 mb-3" />
-                          <p className="text-gray-600 font-medium">Cliquez pour télécharger une image</p>
-                          <p className="text-sm text-gray-500 mt-1">PNG, JPG jusqu'à 5MB</p>
+                          <p className="text-gray-600 font-medium">{t.articles.clickToUpload}</p>
+                          <p className="text-sm text-gray-500 mt-1">{t.articles.imageFormat}</p>
                         </div>
                     )}
 
@@ -348,12 +365,12 @@ export default function ArticlesPage() {
                   {/* Title */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Titre <span className="text-red-500">*</span>
+                      {t.articles.titles} <span className="text-red-500">*</span>
                     </label>
                     <Input
                         value={formData.title}
                         onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                        placeholder="Titre accrocheur de l'article"
+                        placeholder={t.articles.titlePlaceholder}
                         className="text-lg font-medium"
                     />
                   </div>
@@ -361,12 +378,12 @@ export default function ArticlesPage() {
                   {/* Excerpt */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Extrait <span className="text-red-500">*</span>
+                      {t.articles.excerpt} <span className="text-red-500">*</span>
                     </label>
                     <Textarea
                         value={formData.excerpt}
                         onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                        placeholder="Résumé court qui apparaîtra dans la liste des articles"
+                        placeholder={t.articles.excerptPlaceholder}
                         rows={3}
                     />
                   </div>
@@ -374,7 +391,7 @@ export default function ArticlesPage() {
                   {/* Content Editor */}
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Contenu <span className="text-red-500">*</span>
+                      {t.articles.content} <span className="text-red-500">*</span>
                     </label>
 
                     {/* Formatting Toolbar */}
@@ -460,32 +477,32 @@ export default function ArticlesPage() {
                         ref={contentRef}
                         value={formData.content}
                         onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                        placeholder="Contenu complet de l'article (HTML supporté)"
+                        placeholder={t.articles.contentPlaceholder}
                         className="font-mono text-sm rounded-t-none"
                         rows={12}
                     />
                     <p className="text-xs text-gray-500 mt-1">
-                      💡 Utilisez la barre d'outils pour formater votre texte
+                      {t.articles.useToolbar}
                     </p>
                   </div>
 
                   {/* Metadata Grid */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Catégorie</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">{t.articles.category}</label>
                       <select
                           value={formData.category}
                           onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                           className="w-full px-3 py-2 bg-white border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
-                        <option>Conseils pratiques</option>
-                        <option>Droit des sociétés</option>
-                        <option>Droit financier</option>
-                        <option>Actualités juridiques</option>
+                        <option>{t.articles.categories.practical}</option>
+                        <option>{t.articles.categories.corporate}</option>
+                        <option>{t.articles.categories.financial}</option>
+                        <option>{t.articles.categories.news}</option>
                       </select>
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Date</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">{t.articles.date}</label>
                       <Input
                           type="date"
                           value={formData.date}
@@ -493,7 +510,7 @@ export default function ArticlesPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Auteur</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">{t.articles.author}</label>
                       <Input
                           value={formData.author}
                           onChange={(e) => setFormData({ ...formData, author: e.target.value })}
@@ -501,7 +518,7 @@ export default function ArticlesPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">Temps de lecture</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">{t.articles.readTime}</label>
                       <Input
                           value={formData.readTime}
                           onChange={(e) => setFormData({ ...formData, readTime: e.target.value })}
@@ -520,7 +537,7 @@ export default function ArticlesPage() {
                         className="w-5 h-5 text-black rounded bg-black/30 dark:bg-white/30 border-black/30 dark:border-white/30 focus:ring-2 focus:ring-offset-0 focus:ring-black dark:focus:ring-white"
                     />
                     <label htmlFor="published" className="text-sm font-medium text-black cursor-pointer">
-                      Publier cet article immédiatement
+                      {t.articles.publishImmediately}
                     </label>
                   </div>
 
@@ -530,13 +547,13 @@ export default function ArticlesPage() {
                         onClick={handleSaveArticle}
                         className="bg-black dark:bg-white hover:bg-black/90 dark:hover:bg-white/90 dark:text-black text-white px-8"
                     >
-                      {editingId ? "Mettre à jour" : "Créer l'article"}
+                      {editingId ? t.articles.updateButton : t.articles.createButton}
                     </Button>
                     <Button
                         onClick={resetForm}
                         variant="outline"
                     >
-                      Annuler
+                      {t.cancel}
                     </Button>
                   </div>
                 </CardContent>
@@ -546,7 +563,7 @@ export default function ArticlesPage() {
           {/* Articles List */}
           <div className="space-y-4">
             <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Articles publiés ({articles.filter(a => a.published).length}/{articles.length})
+              {t.articles.articlesPublished} ({articles.filter(a => a.published).length}/{articles.length})
             </h2>
 
             {articles.length === 0 ? (
@@ -557,8 +574,8 @@ export default function ArticlesPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                       </svg>
                     </div>
-                    <p className="text-gray-600 text-lg">Aucun article créé pour le moment</p>
-                    <p className="text-gray-500 text-sm mt-2">Commencez par créer votre premier article</p>
+                    <p className="text-gray-600 text-lg">{t.articles.noArticles}</p>
+                    <p className="text-gray-500 text-sm mt-2">{t.articles.noArticlesDesc}</p>
                   </CardContent>
                 </Card>
             ) : (
@@ -578,12 +595,12 @@ export default function ArticlesPage() {
                                 {article.published ? (
                                     <Badge className="bg-green-500 text-white shadow-lg">
                                       <Eye className="w-3 h-3 mr-1" />
-                                      Publié
+                                      {t.articles.published}
                                     </Badge>
                                 ) : (
                                     <Badge className="bg-gray-700 text-white shadow-lg">
                                       <EyeOff className="w-3 h-3 mr-1" />
-                                      Brouillon
+                                      {t.articles.draft}
                                     </Badge>
                                 )}
                               </div>
@@ -600,7 +617,7 @@ export default function ArticlesPage() {
                                     {article.category}
                                   </Badge>
                                   <span>•</span>
-                                  <span>{new Date(article.date).toLocaleDateString('fr-FR', {
+                                  <span>{new Date(article.date).toLocaleDateString("fr-FR", {
                                     day: 'numeric',
                                     month: 'long',
                                     year: 'numeric'
@@ -627,7 +644,7 @@ export default function ArticlesPage() {
                                     variant="ghost"
                                     size="sm"
                                     className="hover:bg-green-50"
-                                    title={article.published ? "Masquer" : "Publier"}
+                                    title={article.published ? t.articles.hide : t.articles.show}
                                 >
                                   {article.published ? (
                                       <Eye className="w-4 h-4 text-green-600" />
@@ -635,15 +652,6 @@ export default function ArticlesPage() {
                                       <EyeOff className="w-4 h-4 text-gray-400" />
                                   )}
                                 </Button>
-                                {/*<Button
-                                    onClick={() => handleEditArticle(article)}
-                                    variant="ghost"
-                                    size="sm"
-                                    className="hover:bg-blue-50"
-                                    title="Modifier"
-                                >
-                                  <Edit className="w-4 h-4 text-blue-600" />
-                                </Button>*/}
                                 <Button
                                     onClick={() => handleDeleteArticle(article.id)}
                                     variant="ghost"
@@ -670,7 +678,7 @@ export default function ArticlesPage() {
                                 </div>
                                 <div>
                                   <p className="text-sm font-medium text-gray-900">{article.author}</p>
-                                  <p className="text-xs text-gray-500">Auteur</p>
+                                  <p className="text-xs text-gray-500">{t.articles.author}</p>
                                 </div>
                               </div>
 
@@ -680,7 +688,7 @@ export default function ArticlesPage() {
                                   onClick={() => handleEditArticle(article)}
                                   className="text-blue-600 hover:text-blue-700 hover:bg-blue-50"
                               >
-                                Modifier l'article →
+                                {t.articles.modifyArticle}
                               </Button>
                             </div>
                           </CardContent>

@@ -16,10 +16,11 @@ import {
   Landmark,
   Scale,
   FileText,
-  Calendar, LogOut, Moon, Sun
+  Calendar, LogOut, Moon, Sun, Home, Languages
 } from "lucide-react"
 import Link from "next/link"
 import {useTheme} from "@/hooks/use-theme";
+import {useTranslation} from "@/hooks/use-translation";
 
 interface Consultation {
   id: string
@@ -47,6 +48,7 @@ export default function ConsultationsPage() {
   const [serviceFilter, setServiceFilter] = useState<"all" | string>("all")
 
   const { theme, toggleTheme } = useTheme()
+  const { t, language, toggleLanguage } = useTranslation()
 
   useEffect(() => {
     const isAuthenticated = localStorage.getItem("adminAuthenticated") === "true"
@@ -92,11 +94,11 @@ export default function ConsultationsPage() {
     setAllConsultations(consultations)
   }, [])
 
-  const currentDate = new Date().toLocaleDateString('fr-FR', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
+  const currentDate = new Date().toLocaleDateString(language === "fr" ? "fr-FR" : "en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   })
 
   const handleLogout = () => {
@@ -172,11 +174,11 @@ export default function ConsultationsPage() {
 
   const getServiceLabel = (service: string) => {
     switch (service) {
-      case "consultation": return "Consultation Juridique"
-      case "droit-financier": return "Droit Financier & Bancaire"
-      case "droit-foncier": return "Droit Foncier"
-      case "droit-societes": return "Droit des Sociétés"
-      default: return "Autre"
+      case "consultation": return t.consultations.services.consultation
+      case "droit-financier": return t.consultations.services.financial
+      case "droit-foncier": return t.consultations.services.landLaw
+      case "droit-societes": return t.consultations.services.corporate
+      default: return t.consultations.services.other
     }
   }
 
@@ -196,7 +198,7 @@ export default function ConsultationsPage() {
               <Link href="/admin/dashboard">
                 <Button variant="outline" size="sm" className="border-border backdrop-blur-sm">
                   <ArrowLeft className="w-4 h-4 mr-2" />
-                  Retour au tableau de bord
+                  {t.backToDashboard}
                 </Button>
               </Link>
               {/* Top Bar */}
@@ -205,18 +207,29 @@ export default function ConsultationsPage() {
                   <Calendar className="w-4 h-4" />
                   <span className="capitalize">{currentDate}</span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <Button variant="outline" size="sm" onClick={handleLogout} className="p-5 rounded-none border-border">
+                <div className="flex items-center gap-3">
+                  <Button variant="outline" size="sm" onClick={handleLogout} className="border-border">
                     <LogOut className="w-4 h-4 mr-2" />
-                    Déconnexion
+                    {t.logout}
                   </Button>
                   <Button
                       variant="outline"
-                      className="p-5 rounded-none"
+                      size="sm"
                       onClick={toggleTheme}
-                      title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+                      className="border-border"
+                      title={theme === "light" ? t.switchToDark : t.switchToLight}
                   >
-                    {theme === "light" ? <Moon className="h-6 w-6 " /> : <Sun className="h-6 w-6" />}
+                    {theme === "light" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+                  </Button>
+                  <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={toggleLanguage}
+                      className="border-border"
+                      title={language === "fr" ? t.switchToEnglish : t.switchToFrench}
+                  >
+                    <Languages className="h-4 w-4 mr-1" />
+                    <span className="font-semibold text-xs">{language === "fr" ? "EN" : "FR"}</span>
                   </Button>
                 </div>
               </div>
@@ -229,11 +242,11 @@ export default function ConsultationsPage() {
                     <Users className="w-6 h-6 text-primary" />
                   </div>
                   <h1 className="text-4xl md:text-5xl font-bold text-foreground">
-                    Demandes de <span className="text-primary">Consultation</span>
+                    {t.consultations.title}
                   </h1>
                 </div>
                 <p className="text-xl text-muted-foreground mb-8">
-                  Gérez et suivez toutes les demandes reçues de tous les services
+                  {t.consultations.subtitle}
                 </p>
 
                 {/* Quick Stats Bar */}
@@ -243,21 +256,21 @@ export default function ConsultationsPage() {
                       <Users className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.total}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Total demandes</p>
+                    <p className="text-xs text-muted-foreground">{t.consultations.totalRequests}</p>
                   </div>
                   <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-4">
                     <div className="flex items-center gap-2 text-primary mb-1">
                       <Clock className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.pending}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">En attente</p>
+                    <p className="text-xs text-muted-foreground">{t.consultations.pending}</p>
                   </div>
                   <div className="bg-card/50 backdrop-blur-sm border border-border rounded-lg p-4">
                     <div className="flex items-center gap-2 text-green-600 mb-1">
                       <CheckCircle2 className="w-4 h-4" />
                       <span className="text-2xl font-bold">{stats.processed}</span>
                     </div>
-                    <p className="text-xs text-muted-foreground">Traitées</p>
+                    <p className="text-xs text-muted-foreground">{t.consultations.processed}</p>
                   </div>
                 </div>
               </div>
@@ -270,7 +283,7 @@ export default function ConsultationsPage() {
           <div className="space-y-4 mb-8">
             {/* Status Filters */}
             <div>
-              <p className="text-sm font-medium text-muted-foreground mb-2">Statut</p>
+              <p className="text-sm font-medium text-muted-foreground mb-2">{t.consultations.status}</p>
               <div className="flex items-center gap-3">
                 <Button
                     variant={statusFilter === "all" ? "default" : "outline"}
@@ -278,7 +291,7 @@ export default function ConsultationsPage() {
                     onClick={() => setStatusFilter("all")}
                     className={statusFilter === "all" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
-                  Toutes ({stats.total})
+                  {t.consultations.all} ({stats.total})
                 </Button>
                 <Button
                     variant={statusFilter === "pending" ? "default" : "outline"}
@@ -286,7 +299,7 @@ export default function ConsultationsPage() {
                     onClick={() => setStatusFilter("pending")}
                     className={statusFilter === "pending" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
-                  En attente ({stats.pending})
+                  {t.consultations.pending} ({stats.pending})
                 </Button>
                 <Button
                     variant={statusFilter === "processed" ? "default" : "outline"}
@@ -294,7 +307,7 @@ export default function ConsultationsPage() {
                     onClick={() => setStatusFilter("processed")}
                     className={statusFilter === "processed" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
-                  Traitées ({stats.processed})
+                  {t.consultations.processed} ({stats.processed})
                 </Button>
               </div>
             </div>
@@ -309,7 +322,7 @@ export default function ConsultationsPage() {
                     onClick={() => setServiceFilter("all")}
                     className={serviceFilter === "all" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
-                  Tous les services
+                  {t.consultations.allServices}
                 </Button>
                 <Button
                     variant={serviceFilter === "consultation" ? "default" : "outline"}
@@ -327,7 +340,7 @@ export default function ConsultationsPage() {
                     className={serviceFilter === "droit-financier" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
                   <Landmark className="w-3 h-3 mr-1" />
-                  Droit Financier & Bancaire ({stats.byService.droitFinancier})
+                  {t.consultations.services.financial} ({stats.byService.droitFinancier})
                 </Button>
                 <Button
                     variant={serviceFilter === "droit-foncier" ? "default" : "outline"}
@@ -336,7 +349,7 @@ export default function ConsultationsPage() {
                     className={serviceFilter === "droit-foncier" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
                   <Building2 className="w-3 h-3 mr-1" />
-                  Droit Foncier ({stats.byService.droitFoncier})
+                  {t.consultations.services.landLaw} ({stats.byService.droitFoncier})
                 </Button>
                 <Button
                     variant={serviceFilter === "droit-societes" ? "default" : "outline"}
@@ -345,7 +358,7 @@ export default function ConsultationsPage() {
                     className={serviceFilter === "droit-societes" ? "bg-primary text-primary-foreground" : "border-border"}
                 >
                   <FileText className="w-3 h-3 mr-1" />
-                  Droit des Sociétés ({stats.byService.droitSocietes})
+                  {t.consultations.services.corporate} ({stats.byService.droitSocietes})
                 </Button>
               </div>
             </div>
@@ -357,9 +370,9 @@ export default function ConsultationsPage() {
                 <Card className="border-border py-6">
                   <CardContent className="py-16 text-center">
                     <Users className="w-16 h-16 mx-auto mb-3 opacity-50 text-muted-foreground" />
-                    <p className="text-foreground text-lg font-medium">Aucune demande trouvée</p>
+                    <p className="text-foreground text-lg font-medium">{t.consultations.noRequests}</p>
                     <p className="text-muted-foreground text-sm mt-2">
-                      Aucune demande ne correspond aux filtres sélectionnés
+                      {t.consultations.noRequestsDesc}
                     </p>
                   </CardContent>
                 </Card>
@@ -401,9 +414,9 @@ export default function ConsultationsPage() {
                                         }
                                     >
                                       {consultation.status === "En attente" ? (
-                                          <><Clock className="w-3 h-3 mr-1" /> En attente</>
+                                          <><Clock className="w-3 h-3 mr-1" /> {t.consultations.pending}</>
                                       ) : (
-                                          <><CheckCircle2 className="w-3 h-3 mr-1" /> Traité</>
+                                          <><CheckCircle2 className="w-3 h-3 mr-1" /> {t.consultations.processed}</>
                                       )}
                                     </Badge>
                                     <span className="text-xs text-muted-foreground">•</span>
@@ -423,7 +436,7 @@ export default function ConsultationsPage() {
                                       className="border-green-200 text-green-700 hover:bg-green-50"
                                   >
                                     <CheckCircle2 className="w-4 h-4 mr-1" />
-                                    Marquer traité
+                                    {t.consultations.markProcessed}
                                   </Button>
                               )}
                               <Button
@@ -442,7 +455,7 @@ export default function ConsultationsPage() {
                           {/* Type de consultation / Domaine */}
                           <div className="bg-muted/50 rounded-lg p-3 border border-border">
                             <p className="text-xs font-medium text-muted-foreground mb-1">
-                              {consultation.consultationType ? "Type de consultation" : "Domaine d'expertise"}
+                              {consultation.consultationType ? t.consultations.consultationType : t.consultations.expertiseArea}
                             </p>
                             <div className="flex items-center gap-2">
                               <p className="text-sm font-semibold text-foreground">
@@ -466,7 +479,7 @@ export default function ConsultationsPage() {
                                         <Mail className="w-4 h-4 text-primary" />
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <p className="text-xs text-muted-foreground">Email</p>
+                                        <p className="text-xs text-muted-foreground">{t.consultations.email}</p>
                                         <a
                                             href={`mailto:${consultation.email}`}
                                             className="text-sm font-medium text-foreground hover:text-primary transition-colors truncate block"
@@ -483,7 +496,7 @@ export default function ConsultationsPage() {
                                         <Phone className="w-4 h-4 text-primary" />
                                       </div>
                                       <div className="flex-1 min-w-0">
-                                        <p className="text-xs text-muted-foreground">Téléphone</p>
+                                        <p className="text-xs text-muted-foreground">{t.consultations.phone}</p>
                                         <a
                                             href={`tel:${consultation.phone}`}
                                             className="text-sm font-medium text-foreground hover:text-primary transition-colors"
@@ -501,7 +514,7 @@ export default function ConsultationsPage() {
                               <div>
                                 <p className="text-sm font-semibold text-foreground mb-2 flex items-center gap-2">
                                   <span className="w-1 h-4 bg-primary rounded-full"></span>
-                                  Description de la demande
+                                    {t.consultations.requestDescription}
                                 </p>
                                 <div className="bg-muted/50 p-4 rounded-lg border border-border">
                                   <p className="text-sm text-foreground leading-relaxed whitespace-pre-wrap">
